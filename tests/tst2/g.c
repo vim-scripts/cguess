@@ -1,0 +1,1 @@
+int extern a(), b();

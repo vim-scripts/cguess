@@ -1,0 +1,56 @@
+CLASS_KEY leaves a TYPE on the STACK
+ENUM_NAME leaves a TYPE and an ID
+CLASS_NAME leaves a TYPE and an ID
+TYPE_NAME likewise
+ORIGINAL_NAMESPACE_NAME likewise
+NAMESPACE_ALIAS likewise
+ENUM_NAME_POP leaves a TYPE
+T_IDENTIFIER leaves an ID ***MAKE IT LEAVE A TYPE TOO***
+ID_EXPRESSION likewise
+QUALIFIED_ID likewise
+UNQUALIFIED_ID likewise
+TYPE_LOOKUP() returns a type and consumes an ID
+where ID is null, nothing is inserted in the symbol table
+future declaration will have link to their local scope instead of nested
+DEFINE() returns a type, consumes an ID and a TYPE
+ENTER() returns a type, consumes an ID and a TYPE, except for ENTER(unnamed_c)
+ENTER_ANONYMOUS() doesn't consume or return things
+ENUM_SPECIFIER_SHORT returns a type, consumes an ID and a TYPE
+ENUM_OR_ET_SHORT returns a type, consumes an ID and a TYPE
+POP_ID() returns an ID and consumes and ID
+POP_TYPE() returns a TYPE and consumes a TYPE
+POPFREE_ID() consumes and ID
+POPFREE_TYPE() consumes a TYPE
+DECLARATION_SPECIFIER_SEQ leaves a TYPE
+DECLARATION_SPECIFIER returns a type
+USING() consumes a TYPE
+DEFINE_VAR_OR_FUNC() should not consume the TYPE, it should do type_connect($1, type_copy(TOP_TYPE())), does not return anything
+ENTER_PARAM() should not consume anything, and return a symbol_table_s
+check the type dispose in DIRECT_DECLARATOR and its abstract after everything works already
+look how DIR and ABS DECLARATORS and NESTED NAMES are done in Roskind's
+make ENTER() not return a copy of type.. something you don't dispose
+USING() should cosume a TYPE
+change the fifo hack for something cleaner and faster
+distinguish between a symbol table lookup with links and strictly local
+move the MAX_JUMP limitation to symbols.c, from identifier.h as it doesn't work now
+write man page
+recognize c from c++ and java
+repair the typedef int a; struct { int a, b; } stuff
+include TYPE_NAME only for UNQUALIFIED_ID in declarations, not expressions
+add --tree option
+in scope_lookup() change identifier_lookup(); to { identifier_lookup(); scope_stmt_reset(); } after T_ID lookup is only done once
+add a limitation for type_visual() buffer length
+static stacks
+DEFINE_VA_LIST() consumes nothing and return nothing
+add note bout license vs. binary distrib
+in a nested struct declaration like:
+struct x {
+	struct nested y;
+}; define the nested struct in the outer scope, check when it should be so and when it shouldn't.
+add constructor params to their own scope and add precedence rules for constructors
+after "typename" any sequence of identifiers and ::s should be allowed
+only display vars and funcs in completion info after . and ->
+an identifier struct for a constructor in the symbol table should have a list of all other constructors
+REMEMBER to allow both, the template's parameter types and the ones from the class in a member function parameters list in a code like:
+template <typename _Tp> void vector::find(_Tp element, size_type __n) {} the templates parameters are the same that in the definition of vector so looking up in vector will look the parameters up, too.
+make sure the declarations of constructors that get classified as declarators, jave their names mangled as well.

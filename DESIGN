@@ -1,0 +1,24 @@
+Blah blah
+The parser (c++.y) calls to functions in "scope.c" everytime
+it opens a new scope and stuff and the "scope.c" functions will
+manage (open and close) symbol tables and stuff, too. This
+file's functions will call to "context.c" to maintain the
+current context in order, and to "identifier.c" functions for
+utility functions for managing identifiers in general. The
+basic type for all is struct type_s and all useful code for
+struct type_s should be in "type.c".
+"symbols.c", "list.c", "hash.c", "splay.c", "avl.c" and "stack.c"
+will be general implementations of known algorithms not tuned
+for this program. They will be bases for our structures.
+"symbols.c" should be able to use any of: list_s, hash_s,
+splay_s or avl_s and work equally well. Speed tests will be made.
+
+In the future there should be separate types for identifier,
+type, token. Type will be the common part of identifier and
+token. Token will be YYSTYPE and identifier will be for the
+elements of symbol tables. "token.c" will be the interface
+between tokens, types and identifiers.
+There also should be separate structures for type specifiers
+and declarators and functions that combine those two into a
+struct type_s which parser wouldn't know about and which would
+be called from "scope.c".

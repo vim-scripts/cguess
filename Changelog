@@ -1,0 +1,132 @@
+2005-06-19 20:00  balrog
+	* README:
+
+	Version 0.2 is ready, changes since 0.1 are:
+	- Removed "name" and "ref_count" and "type_def" from "type_s",
+	- Added pointer to definition instead,
+	- Remove "last_type" and "last_id" from the parser and all
+	productions,
+	- Added a stack for IDs and one for types instead, and propagated
+	through the grammar and lexer and all source code,
+	- Implemented static stacks for the above change,
+	- Removed new useless rules, and added some new ones,
+	- Namespace aliases as a consequence,
+	- Actualised README,
+	- Added token T_OVERLOAD in the parser and the lexer,
+	- Thought of supporting C# in future,
+	- Made the parser not return an error if lexer reads <special>,
+	- Added params_c identifier class for a function's parameter list,
+	- Changed my mind and removed params_c identifier class for a
+	function's parameter list,
+	- Removed type_function() and fixed type_parametrized() and
+	type_connect() a bit,
+	- Moved auto label generation to scope.c and made optional,
+	- Added s:Strip() in cguess.vim,
+	- Modified scope_open(), scope_define(), scope_using() definitions,
+	- Added scope_open_params,
+	- Removed scope_open_define, now all scope_open can define,
+	- Removed scope_join, joining will be done with "using"
+	- Added order preserving symbol tables in symbols.c,
+	- A slight change in syntax highlighting rules in the plugin,
+	- Some new key mappings,
+	- Removed USING_PREFIX
+	- Added non-elaborating type specifiers distinction,
+	- Slightly improved configure and Makefile,
+	- Default window split is now vertical and to the right,
+	- Added (pseudo) bit-fields support,
+	- Implemented the links inside symbol tables,
+	- Temporarily removed the MAX_JUMP check in identifier.c,
+	- Added some cmdline parameter processing to main() and usage info,
+	- Added language.h,
+	- Changed the way we trigger the ID completion info and added a new
+	token T_SPECIAL for this,
+	- Changed scope_stmt_lookup() and added scope_function_info() and
+	scope_lookup_info(),
+	- Improved type_visual() for functions (now parameter list is
+	printed),
+	- Reversed the order of tree_foreach() calls, it is now alphabetic,
+	- Separate variable for vertical and horizontal window sizes,
+	- Displaying types when splitting horizontally,
+	- Added the TYPE_COLUMN define in scope.h and .c,
+	- Added primitive tips about function declarations,
+	- Added --types parameter to main.c,
+	- Disabled completion when inside a comment or other in the plugin,
+	- Added primitive identifer completion for comparison of enum types,
+	- Added rules for nested names,
+	- Changed the idea of id lookup, now we go from child to the parent
+	instead of following the stack,
+	- Renamed old context_lookup() to context_c_lookup(),
+	- Added context_global(),
+	- Added scope.c functions for scope_stmt,
+	- Renamed scope_stmt_lookup() to scope_local_lookup(), and modified
+	scope_lookup() appropriately,
+	- Created cguess.h and moved some globals there, 
+	- Temporarily added a field "nested" to struct type_s,
+	- Changed the whole concept of DECL_SPECIFIER_SEQ productions and
+	propagated the changes through the grammar,
+	- Added the "this" keyword functionality,
+	- Added identifier completion on scope operator,
+	- Added listing identifiers from linked tables on scope_lookup_info(),
+	- Added info about variable length argument lists when printing types,
+	- Added "..." to highlighting groups,
+	- A check in type_visual() whether a function has a return type,
+	- Added bitfields to abstract declarators as well,
+	- Added a limited support for typeof(),
+	- Removed EXPORT_OPT from c++.y,
+	- Made type_dispose() debug mode exclusive to gain some speed,
+	- Scanner now returns the type for identifiers as semantic value,
+	- Removed all uses of scope_stmt_reset() from c++.y,
+	- scope_stmt_reset() is now automatically called after first lookup,
+	- Corrected semantic value numbers ($N) in all productions that had
+	tie-in action,
+	- Restriced redefinitions to where GCC syntax allows them, by
+	introducing "nested name or type specifiers" and modifying others,
+	- Restricted id expressions to variables and functions,
+	- Added name generation for destructors and corrected highlighting
+	for destructors,
+	- In type_visual() no return type displayed for destructors,
+	- Resolved a tiny RR conflict in INITIALIZER_LIST,
+	- Added support for the "using" keyword in c++.y and scope_using_id() in
+	scope.c,
+	- Added the ISO "restrict" keyword and some GNU extensions to the
+	lexer and the "__thread" storage class in parser,
+	- Added GNU C++ minimum and maximum operators,
+	- Resolved all RR conflicts and added %expect option in c++.y,
+	- Added basic support for templated defintions,
+	- Added forgotten POSTFIX_EXPRESSION: TYPE_NAME T_FUNCTION,
+	- Added constructor call also to DIRECT_DECLARATOR,
+	- Added declaration's precedence over expression,
+	- Disambiguated some uses of "typename" keyword,
+	- Added a separate PARAMETER_DECLARATOR for templates,
+	- Allowed dollar sign in identifiers,
+	- Made MEMBER_SPECIFICATION left recursive,
+	- Added "operator" keyword and operators to syntax highlighting and
+	dollar sign in identifiers,
+	- Changed SIMPLE_DECLARATION and FUNCTION_DEFINITION to allow
+	constructors,
+	- Corrected identifier lookup for constructors,
+	- Renamed is_builtin() to is_gcc_builtin(),
+	- Changed source file line numbering to start from 1,
+	- Added support for statement expressions (a GNU C extension),
+	- Changed flags for "install" in Makefile to their short forms and
+	corrected some regexps in configure and cguess.vim to be FreeBSD and
+	OpenBSD compatible,
+	- Made a wrapper function for yylex() that caches lookahead tokens that
+	can be later used for some grammar disambiguation,
+	- Added a basic support for conversion functions,
+	- Wrote language.c for fast switching between languages and made the
+	scanner use the tables from language.c,
+	- Completed the --lang= option support in main.c,
+	- Made tips about prototypes appear in the VIM status line,
+	- Temporarily moved grammar for destructors to typenames (similarly to
+	constructors),
+	- Prohibited scoped IDs after T_ARROW or T_DOT in POSTFIX_EXPRESSIONS,
+	- Made nested classes be declared in both local and parent scope,
+	- Created INSTALL file,
+	- Added checking if we're in a preprocessor directive in the plugin,
+	- Added __signed__ and __unsigned__.
+
+2005-05-20 20:00  balrog
+	* README:
+
+	First version is released.

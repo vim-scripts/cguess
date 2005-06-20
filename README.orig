@@ -1,0 +1,118 @@
+cguess 0.2
+==========
+cguess is supposed to make writing C and C++ and Java(tm) code
+easier by providing information about the identifiers accessible
+in the current scope. In this version it only consists of one
+program that will show the names of identifiers that could be
+correct to write at the place where the C program given on
+standard input ends, and a plugin for VIM editor that launches
+this program when appropriate and presents the information at
+the time of editing. It will also display function prototypes
+on some occasions now. Similar plugins may be made for other
+text editors using cguess, if someone cares.
+This is the second working version and its functionality is very
+limited. It supports most but not all of ANSI C and C++ and
+nothing of Java(tm). In future versions it will have better
+support for these languages and be more flexible. Also several
+other tools will be included with this program.
+cguess is quite slow and it is because in this version it does
+no caching of the program's identifier tree - everytime it wants
+to show a user some kind of tip in the text editor, it has to
+parse the whole program from the beginning (which is comparable
+to compiling the program, except it produces no output and saves
+the time this way). Next versions should be faster because
+caching will be used and also more optimal data structures will
+be implemented. In some version, the grammar for the expressions
+should eventually be rewritten to be much simplier, like in some
+other parsers.
+The code is unstable, but most of the memory allocation bugs
+have been fixed in this version.
+
+Building
+========
+To build cguess use ./configure and make. To install it using
+default locations run make install. It compiles well when flex
+2.5.31 and GNU Bison 1.875a are installed, I don't know if it
+also works with other versions or clones of lex/yacc.
+If you don't have these programs, you can use the *-dist files
+that are included and see if it works.
+Run ./configure --help to read about other options.
+After it is installed set the variables used by the VIM plugin
+script to their correct values (default values may be wrong).
+
+Using
+=====
+To use the plugin, run VIM and source the plugin with
+":so cguess.vim" (if it is not done automatically) and start
+editing a source file in one of the supported languages. When
+you get tired of it you either need to run make uninstall in
+the same directory where you built cguess or remove cguess.vim
+from your VIM plugins directory by hand, or to disable it
+temporarily unmap the key mappings made by the plugin, which
+in this version are:
+	"::"	- display list of identifiers in the specified scope,
+	"->"	- display list of functions and variables accessible,
+	"."	- same as for "->" (like in gdb),
+	"("	- display function's prototype where applicable,
+	"=="	- display enumerators if the left operand is an enum,
+	"!="	- same as for "==",
+using ":iunmap <mapping>" (all are INSERT mode only).
+For correct operating on standard C/C++ code you will need a C
+preprocessor installed under the name "cpp".  To change any
+parameters of cguess look inside cguess.vim file in the
+plugins directory and in the config file in the build
+directory. In particular the variable g:cguessCFLAGS is
+important for calling the preprocessor correctly. The plugin
+will try to guess the value correct for your system but you
+will be much better off setting it from inside your .vimrc
+script (usually a system-wide value in the global vimrc is
+enough, if you're an administrator).
+
+Information
+===========
+For more actual information about cguess look at the cguess
+homepage on Internet at http://www.zabor.org/cguess
+
+Bugs
+====
+If you find a bug in cguess (you surely will) you can send a
+bug report to the e-mail address <balrogg@gmail.com>. The bug
+can be anything that you think doesn't work the way it should,
+in particular when the program segmentates faults or faults
+segmentation or when it parses your program differently from
+how gcc does it. If you are using the VIM plugin you won't see
+any error messages, so if something is not working you can try
+preprocessing the source file you're editing and feeding it to
+cguess with parameter "-d" and see if an error message appears.
+For a more verbose explanation add a line "%debug" to "c++.y".
+You can also send me an e-mail if you're just using cguess or
+you have something to say about it.
+
+C/C++ grammar
+=============
+If you are looking for a C or C++ grammar in a format
+understood by yacc look in the versions 0.0._ of cguess
+sources that may be accessible at the homepage. I first
+copied the original grammar from ISO/IEC C++ specification
+and put it in yacc's format. I was gradualy correcting the
+conflicts (there were 1600 in the original version) and
+optimizing it for the particular purpose for which cguess
+needs the grammar. That's why you may be more interested in
+the original version with all it's conflicts.
+
+Copying
+=======
+cguess is a free software. cguess is
+Copyright (c) 2005, Andrzej Zaborowski <balrogg@gmail.com>
+All files included in cguess except the VIM plugin script
+(found at plugin/cguess.vim) can be distributed under the
+terms of the 2-clause BSD license (the file COPYING contains
+these terms) but if you distribute or use any part of cguess
+you are encouraged to make a donation for needy children in
+Uganda as described in VIM's documentation (which can be
+found in Internet at the URL http://www.vim.org/). Please
+visit http://iccf-holland.org/ and http://www.vim.org/iccf/
+for more information about donating. The file
+plugin/cguess.vim in cguess source tree is distributed under
+VIM license terms (which BSD licence should be compatible
+with).

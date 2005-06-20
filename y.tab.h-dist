@@ -1,0 +1,312 @@
+/* A Bison parser, made by GNU Bison 1.875a.  */
+
+/* Skeleton parser for Yacc-like parsing with Bison,
+   Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003 Free Software Foundation, Inc.
+
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 59 Temple Place - Suite 330,
+   Boston, MA 02111-1307, USA.  */
+
+/* As a special exception, when this file is copied by Bison into a
+   Bison output file, you may use that output file without restriction.
+   This special exception was added by the Free Software Foundation
+   in version 1.24 of Bison.  */
+
+/* Tokens.  */
+#ifndef YYTOKENTYPE
+# define YYTOKENTYPE
+   /* Put the tokens into the symbol table, so that GDB and other debuggers
+      know about them.  */
+   enum yytokentype {
+     T_IDENTIFIER = 258,
+     T_TYPEDEF_ID = 259,
+     T_ENUM_ID = 260,
+     T_NAMESPACE_ID = 261,
+     T_ALIAS_ID = 262,
+     T_CLASS_ID = 263,
+     T_TEMPLATE_ID = 264,
+     T_NUM_LITERAL = 265,
+     T_CHAR_LITERAL = 266,
+     T_STRING_LITERAL = 267,
+     T_BOOLEAN_LITERAL = 268,
+     T_LANGLE = 269,
+     T_RANGLE = 270,
+     T_LPAREN = 271,
+     T_RPAREN = 272,
+     T_ELIPSIS = 273,
+     T_COMMA = 274,
+     T_LBRACK = 275,
+     T_RBRACK = 276,
+     T_LBRACE = 277,
+     T_RBRACE = 278,
+     T_EQ = 279,
+     T_SCOPE = 280,
+     T_SEMIC = 281,
+     T_COLON = 282,
+     T_DOTSTAR = 283,
+     T_QUESTION = 284,
+     T_DOT = 285,
+     T_DYNAMIC_CAST = 286,
+     T_STATIC_CAST = 287,
+     T_REINTERPRET_CAST = 288,
+     T_CONST_CAST = 289,
+     T_TYPEID = 290,
+     T_THIS = 291,
+     T_TEMPLATE = 292,
+     T_TYPENAME = 293,
+     T_THROW = 294,
+     T_TRY = 295,
+     T_CATCH = 296,
+     T_TYPEDEF = 297,
+     T_FRIEND = 298,
+     T_CLASS = 299,
+     T_NAMESPACE = 300,
+     T_ENUM = 301,
+     T_STRUCT = 302,
+     T_UNION = 303,
+     T_VIRTUAL = 304,
+     T_PRIVATE = 305,
+     T_PROTECTED = 306,
+     T_PUBLIC = 307,
+     T_EXPORT = 308,
+     T_AUTO = 309,
+     T_REGISTER = 310,
+     T_EXTERN = 311,
+     T_MUTABLE = 312,
+     T_ASM = 313,
+     T_USING = 314,
+     T_INLINE = 315,
+     T_EXPLICIT = 316,
+     T_STATIC = 317,
+     T_CONST = 318,
+     T_VOLATILE = 319,
+     T_OVERLOAD = 320,
+     T_OPERATOR = 321,
+     T_SIZEOF = 322,
+     T_NEW = 323,
+     T_DELETE = 324,
+     T_PLUS = 325,
+     T_MINUS = 326,
+     T_STAR = 327,
+     T_SLASH = 328,
+     T_PERCENT = 329,
+     T_HAT = 330,
+     T_AND = 331,
+     T_OR = 332,
+     T_TILDE = 333,
+     T_NOT = 334,
+     T_PLUS_EQ = 335,
+     T_MINUS_EQ = 336,
+     T_STAR_EQ = 337,
+     T_SLASH_EQ = 338,
+     T_PERCENT_EQ = 339,
+     T_HAT_EQ = 340,
+     T_AND_EQ = 341,
+     T_OR_EQ = 342,
+     T_LTLT = 343,
+     T_GTGT = 344,
+     T_GTGT_EQ = 345,
+     T_LTLT_EQ = 346,
+     T_EQEQ = 347,
+     T_NE = 348,
+     T_LE = 349,
+     T_GE = 350,
+     T_ANDAND = 351,
+     T_OROR = 352,
+     T_INCR = 353,
+     T_DECR = 354,
+     T_ARROW_STAR = 355,
+     T_ARROW = 356,
+     T_FUNCTION = 357,
+     T_SUBSCRIPT = 358,
+     T_CHAR = 359,
+     T_WCHAR = 360,
+     T_BOOL = 361,
+     T_SHORT = 362,
+     T_INT = 363,
+     T_LONG = 364,
+     T_SIGNED = 365,
+     T_UNSIGNED = 366,
+     T_FLOAT = 367,
+     T_DOUBLE = 368,
+     T_VOID = 369,
+     T_CASE = 370,
+     T_DEFAULT = 371,
+     T_IF = 372,
+     T_ELSE = 373,
+     T_SWITCH = 374,
+     T_WHILE = 375,
+     T_DO = 376,
+     T_FOR = 377,
+     T_BREAK = 378,
+     T_CONTINUE = 379,
+     T_GOTO = 380,
+     T_RETURN = 381,
+     T_TYPEOF = 382,
+     T_THREAD = 383,
+     T_MINIMUM = 384,
+     T_MAXIMUM = 385,
+     T_RESTRICT = 386,
+     T_SPECIAL = 387,
+     T_LAST_TOKEN = 388,
+     PREC = 389
+   };
+#endif
+#define T_IDENTIFIER 258
+#define T_TYPEDEF_ID 259
+#define T_ENUM_ID 260
+#define T_NAMESPACE_ID 261
+#define T_ALIAS_ID 262
+#define T_CLASS_ID 263
+#define T_TEMPLATE_ID 264
+#define T_NUM_LITERAL 265
+#define T_CHAR_LITERAL 266
+#define T_STRING_LITERAL 267
+#define T_BOOLEAN_LITERAL 268
+#define T_LANGLE 269
+#define T_RANGLE 270
+#define T_LPAREN 271
+#define T_RPAREN 272
+#define T_ELIPSIS 273
+#define T_COMMA 274
+#define T_LBRACK 275
+#define T_RBRACK 276
+#define T_LBRACE 277
+#define T_RBRACE 278
+#define T_EQ 279
+#define T_SCOPE 280
+#define T_SEMIC 281
+#define T_COLON 282
+#define T_DOTSTAR 283
+#define T_QUESTION 284
+#define T_DOT 285
+#define T_DYNAMIC_CAST 286
+#define T_STATIC_CAST 287
+#define T_REINTERPRET_CAST 288
+#define T_CONST_CAST 289
+#define T_TYPEID 290
+#define T_THIS 291
+#define T_TEMPLATE 292
+#define T_TYPENAME 293
+#define T_THROW 294
+#define T_TRY 295
+#define T_CATCH 296
+#define T_TYPEDEF 297
+#define T_FRIEND 298
+#define T_CLASS 299
+#define T_NAMESPACE 300
+#define T_ENUM 301
+#define T_STRUCT 302
+#define T_UNION 303
+#define T_VIRTUAL 304
+#define T_PRIVATE 305
+#define T_PROTECTED 306
+#define T_PUBLIC 307
+#define T_EXPORT 308
+#define T_AUTO 309
+#define T_REGISTER 310
+#define T_EXTERN 311
+#define T_MUTABLE 312
+#define T_ASM 313
+#define T_USING 314
+#define T_INLINE 315
+#define T_EXPLICIT 316
+#define T_STATIC 317
+#define T_CONST 318
+#define T_VOLATILE 319
+#define T_OVERLOAD 320
+#define T_OPERATOR 321
+#define T_SIZEOF 322
+#define T_NEW 323
+#define T_DELETE 324
+#define T_PLUS 325
+#define T_MINUS 326
+#define T_STAR 327
+#define T_SLASH 328
+#define T_PERCENT 329
+#define T_HAT 330
+#define T_AND 331
+#define T_OR 332
+#define T_TILDE 333
+#define T_NOT 334
+#define T_PLUS_EQ 335
+#define T_MINUS_EQ 336
+#define T_STAR_EQ 337
+#define T_SLASH_EQ 338
+#define T_PERCENT_EQ 339
+#define T_HAT_EQ 340
+#define T_AND_EQ 341
+#define T_OR_EQ 342
+#define T_LTLT 343
+#define T_GTGT 344
+#define T_GTGT_EQ 345
+#define T_LTLT_EQ 346
+#define T_EQEQ 347
+#define T_NE 348
+#define T_LE 349
+#define T_GE 350
+#define T_ANDAND 351
+#define T_OROR 352
+#define T_INCR 353
+#define T_DECR 354
+#define T_ARROW_STAR 355
+#define T_ARROW 356
+#define T_FUNCTION 357
+#define T_SUBSCRIPT 358
+#define T_CHAR 359
+#define T_WCHAR 360
+#define T_BOOL 361
+#define T_SHORT 362
+#define T_INT 363
+#define T_LONG 364
+#define T_SIGNED 365
+#define T_UNSIGNED 366
+#define T_FLOAT 367
+#define T_DOUBLE 368
+#define T_VOID 369
+#define T_CASE 370
+#define T_DEFAULT 371
+#define T_IF 372
+#define T_ELSE 373
+#define T_SWITCH 374
+#define T_WHILE 375
+#define T_DO 376
+#define T_FOR 377
+#define T_BREAK 378
+#define T_CONTINUE 379
+#define T_GOTO 380
+#define T_RETURN 381
+#define T_TYPEOF 382
+#define T_THREAD 383
+#define T_MINIMUM 384
+#define T_MAXIMUM 385
+#define T_RESTRICT 386
+#define T_SPECIAL 387
+#define T_LAST_TOKEN 388
+#define PREC 389
+
+
+
+
+#if ! defined (YYSTYPE) && ! defined (YYSTYPE_IS_DECLARED)
+typedef int YYSTYPE;
+# define yystype YYSTYPE /* obsolescent; will be withdrawn */
+# define YYSTYPE_IS_DECLARED 1
+# define YYSTYPE_IS_TRIVIAL 1
+#endif
+
+extern YYSTYPE yylval;
+
+
+

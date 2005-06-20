@@ -1,0 +1,11 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=1306
+
+Cguess is a (Yet another?) C/C++/Java syntax auto-completer meant to be used as a plugin for VIM text editor or others. See its homepage: http://www.zabor.org/cguess and the README file for details.
+
+This is an early version and is quite limited. It works the "intellisense"-style way but the interface is quite primitive in this version. It maps several key combinations in insert mode and will show a list of members in a splitted window, function prototypes or the list of enumerators in comparisons (after typing == or !=) whenever possible.
+
+Cguess is based on a true C++ language parser (like the compilers) and understands even the most complex syntactic constructs (but it will refuse to parse programs that contain errors). The parser supports several GNU extensions to C and C++ and some ISO and ANSI specific ideas.
+
+Java is not supported.
+
+If you use cguess, help Uganda.

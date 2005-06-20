@@ -1,0 +1,417 @@
+ABSTRACT_DECLARATOR	c++.y	1449
+ABSTRACT_DECLARATOR_OPT	c++.y	1455
+ACCESS_SPECIFIER	c++.y	1977
+ADDITIVE_EXPRESSION	c++.y	3027
+AND_EXPRESSION	c++.y	3085
+ASM_DEFINITION	c++.y	1095
+ASM_EXTENSION	c++.y	1114
+ASM_EXTENSION_LIST_OPT	c++.y	1108
+ASM_OPERAND_CONSTRAINT_STRING	c++.y	1122
+ASM_OPERAND_EXPRESSION	c++.y	1129
+ASM_OPERAND_SYMBOLIC	c++.y	1133
+ASSIGNMENT_EXPRESSION	c++.y	3124
+ASSIGNMENT_EXPRESSION_OPT	c++.y	3132
+ASSIGNMENT_OPERATOR	c++.y	3137
+BASE_CLAUSE_LEFT	c++.y	1946
+BASE_CLAUSE_RIGHT	c++.y	1950
+BASE_SPECIFIER	c++.y	1971
+BASE_SPECIFIER_LIST	c++.y	1957
+BIT_FIELD_DECLARATOR	c++.y	1267
+BLOCK_DECLARATION	c++.y	492
+BLOCK_DECLARATION_STATEMENT	c++.y	2525
+CAST_EXPRESSION	c++.y	2989
+CLASS_ENUM_OR_ET_SPECIFIER	c++.y	776
+CLASS_ET_SHORT	c++.y	800
+CLASS_KEY	c++.y	1683
+CLASS_NAME	c++.y	1643
+CLASS_OR_ET_SHORT	c++.y	815
+CLASS_REDEF_OR_ET	c++.y	833
+CLASS_SPECIFIER_LEFT	c++.y	1668
+CLASS_SPECIFIER_RIGHT	c++.y	1676
+CLASS_SPECIFIER_SHORT	c++.y	1654
+COMMA_INIT_DECLARATOR_LIST_OPT	c++.y	1155
+COMPOUND_STATEMENT	c++.y	2433
+CONDITION	c++.y	2463
+CONDITIONAL_EXPRESSION	c++.y	3117
+CONDITION_DECLARATOR	c++.y	2472
+CONDITION_OPT	c++.y	2481
+CONDITION_TYPE_SPECIFIER_SEQ	c++.y	2477
+CONSTANT_EXPRESSION	c++.y	3162
+CONSTANT_EXPRESSION_OPT	c++.y	3166
+CONSTANT_INITIALIZER_OPT	c++.y	1931
+CONVERSION_DECLARATOR_OPT	c++.y	2060
+CONVERSION_FUNCTION_ID	c++.y	1985
+CONVERSION_TYPE_ID	c++.y	2025
+CTOR_INITIALIZER	c++.y	2070
+CTOR_INITIALIZER_OPT	c++.y	2074
+CV_QUALIFIER	c++.y	1394
+CV_QUALIFIER_SEQ	c++.y	1390
+CV_QUALIFIER_SEQ_OPT	c++.y	1400
+DECLARATION	c++.y	482
+DECLARATION_SEQ	c++.y	472
+DECLARATION_SEQ_OPT	c++.y	477
+DECLARATION_STATEMENT	c++.y	2517
+DECLARATOR	c++.y	1209
+DECLARATOR_ID	c++.y	1408
+DECL_SPECIFIER_SEQ	c++.y	569
+DECL_SPECIFIER_SEQ_RIGHT	c++.y	588
+DECL_SPECIFIER_SEQ_START	c++.y	565
+DEFINE	c++.y	/^#	define DEFINE(class)	\\$/
+DEFINE_VAR_OR_FUNC	c++.y	/^#	define DEFINE_VAR_OR_FUNC(x)	\\$/
+DEFINE_VA_LIST	c++.y	/^#	define DEFINE_VA_LIST()	\\$/
+DELETE_ARRAY	c++.y	3194
+DELETE_EXPRESSION	c++.y	2984
+DESTRUCTOR_ID	c++.y	/^#	define DESTRUCTOR_ID()	\\$/
+DIRECT_ABSTRACT_DECLARATOR	c++.y	1463
+DIRECT_ABSTRACT_DECLARATOR_OPT	c++.y	1487
+DIRECT_ABSTRACT_DECLARATOR_PARAMETRIZED_LEFT	c++.y	1481
+DIRECT_DECLARATOR	c++.y	1289
+DIRECT_DECLARATOR_PARAMETRIZED_LEFT	c++.y	1360
+DIRECT_NEW_DECLARATOR	c++.y	2961
+DIRECT_NON_PAREN_DECLARATOR	c++.y	1325
+DIRECT_NON_PAREN_DECLARATOR_PARAMETRIZED_LEFT	c++.y	1371
+DIRECT_NON_REDEF_DECLARATOR	c++.y	1310
+DIRECT_NON_REDEF_DECLARATOR_PARAMETRIZED_LEFT	c++.y	1365
+DIRECT_PAREN_NON_REDEF_DECLARATOR	c++.y	1341
+DIRECT_PAREN_NON_REDEF_DECLARATOR_PARAMETRIZED_LEFT	c++.y	1377
+ELIPSIS_OPT	c++.y	457
+ENTER	c++.y	/^#	define ENTER(class)	\\$/
+ENTER_ANONYMOUS	c++.y	/^#	define ENTER_ANONYMOUS()	\/* TODO: Assign an AUTO/
+ENTER_PARAMS	c++.y	/^#	define ENTER_PARAMS()	\\$/
+ENTER_PARAMS_AT	c++.y	/^#	define ENTER_PARAMS_AT(type)	\\$/
+ENUMERATOR	c++.y	983
+ENUMERATOR_CLAUSE_LEFT	c++.y	943
+ENUMERATOR_CLAUSE_RIGHT	c++.y	952
+ENUMERATOR_DEFINITION	c++.y	975
+ENUMERATOR_LIST	c++.y	962
+ENUM_ET_SHORT	c++.y	880
+ENUM_NAME	c++.y	853
+ENUM_OR_ET_SHORT	c++.y	901
+ENUM_PUSH	c++.y	784
+ENUM_REDEF_OR_ET	c++.y	917
+ENUM_SPECIFIER_SHORT	c++.y	932
+EQUALITY_EXPRESSION	c++.y	3071
+EXCEPTION_DECLARATION	c++.y	2368
+EXCEPTION_SPECIFICATION	c++.y	2379
+EXCEPTION_SPECIFICATION_OPT	c++.y	2384
+EXCLUSIVE_OR_EXPRESSION	c++.y	3091
+EXPLICIT_INSTANTIATION	c++.y	2274
+EXPLICIT_SPECIALIZATION	c++.y	2278
+EXPRESSION	c++.y	3151
+EXPRESSION_LIST	c++.y	2868
+EXPRESSION_LIST_OPT	c++.y	2874
+EXPRESSION_OPT	c++.y	3157
+EXPRESSION_STATEMENT	c++.y	2429
+EXTENSION_NAMESPACE_DEFINITION	c++.y	1022
+FOR_INIT_STATEMENT	c++.y	2504
+FUNCTION_BODY	c++.y	1597
+FUNCTION_BODY_LEFT	c++.y	1588
+FUNCTION_BODY_RIGHT	c++.y	1592
+FUNCTION_DEFINITION	c++.y	1571
+FUNCTION_SPECIFIER	c++.y	666
+FUNCTION_TRY_BLOCK	c++.y	2342
+GLOBAL_SCOPE	c++.y	2758
+HANDLER	c++.y	2362
+HANDLER_SEQ	c++.y	2349
+HANDLER_SEQ_OPT	c++.y	2353
+IDENTIFIER	c++.y	/^#	define IDENTIFIER(str)	\\$/
+IDENTIFIER_AUTO	c++.y	/^#	define IDENTIFIER_AUTO()	\\$/
+IDENTIFIER_C	c++.y	453
+IDENTIFIER_EMPTY	c++.y	/^#	define IDENTIFIER_EMPTY()	\\$/
+IDENTIFIER_OPT	c++.y	448
+ID_CLASS	c++.y	/^#	define ID_CLASS(class)	\\$/
+ID_EXPRESSION	c++.y	2558
+ID_FROM_TYPE	c++.y	/^#	define ID_FROM_TYPE()	\\$/
+ID_MANGLE	c++.y	/^#	define ID_MANGLE()	\\$/
+INCLUSIVE_OR_EXPRESSION	c++.y	3097
+INITIALIZER_CLAUSE	c++.y	1618
+INITIALIZER_LIST	c++.y	1629
+INITIALIZER_LIST_LEFT	c++.y	1635
+INITIALIZER_OPT	c++.y	1607
+INIT_DECLARATOR	c++.y	1174
+INIT_DECLARATOR_LIST	c++.y	1165
+INIT_DECLARATOR_LIST_OPT	c++.y	1160
+ITERATION_STATEMENT	c++.y	2486
+JUMP_STATEMENT	c++.y	2510
+LABELED_STATEMENT	c++.y	2422
+LEAVE	c++.y	/^#	define LEAVE()	\\$/
+LINKAGE_SPECIFICATION	c++.y	1146
+LITERAL	c++.y	435
+LOCAL_SCOPE	c++.y	2775
+LOCAL_SCOPE_SEQ	c++.y	2617
+LOGICAL_AND_EXPRESSION	c++.y	3103
+LOGICAL_OR_EXPRESSION	c++.y	3110
+MEMBER_DECLARATION	c++.y	1753
+MEMBER_DECLARATOR	c++.y	1855
+MEMBER_DECLARATOR_LIST_OPT	c++.y	1779
+MEMBER_PARAMETER_LIST	c++.y	1803
+MEMBER_SPECIFICATION	c++.y	1692
+MEMBER_TEMPLATE_DECLARATION	c++.y	2186
+MEM_INITIALIZER	c++.y	2087
+MEM_INITIALIZER_ID	c++.y	2093
+MEM_INITIALIZER_LIST	c++.y	2082
+MULTIPLICATIVE_EXPRESSION	c++.y	3017
+Mmain	main.c	/^int main(int argc, const char *argv[]) {$/
+NAMED_NAMESPACE_DEFINITION	c++.y	1003
+NAMED_TYPE_SPECIFIER	c++.y	692
+NAMESPACE_ALIAS	c++.y	1058
+NAMESPACE_ALIAS_DEFINITION	c++.y	1062
+NAMESPACE_BODY	c++.y	1054
+NAMESPACE_DEFINITION	c++.y	998
+NAMESPACE_NAME	c++.y	989
+NESTED_NAMESPACE_ALIAS_SPECIFIER	c++.y	2737
+NESTED_NAMESPACE_ALIAS_SPECIFIER_LOCAL	c++.y	2751
+NESTED_NAME_SPECIFIER	c++.y	2578
+NESTED_ORIGINAL_NAMESPACE_NAME_SPECIFIER	c++.y	2706
+NESTED_ORIGINAL_NAMESPACE_NAME_SPECIFIER_LOCAL	c++.y	2721
+NESTED_SCOPE_SPECIFIER	c++.y	2604
+NESTED_TYPE_NAME_SPECIFIER	c++.y	2662
+NESTED_TYPE_OR_NAME_SPECIFIER	c++.y	2624
+NEW_ARRAY	c++.y	3186
+NEW_DECLARATOR	c++.y	2950
+NEW_DECLARATOR_OPT	c++.y	2956
+NEW_EXPRESSION	c++.y	2914
+NEW_INITIALIZER	c++.y	2970
+NEW_INITIALIZER_OPT	c++.y	2976
+NEW_PLACEMENT	c++.y	2921
+NEW_PLACEMENT_OPT	c++.y	2926
+NEW_TYPE_ID	c++.y	2945
+NE_CLASS_OR_ENUM_SPECIFIER	c++.y	2050
+NON_ELABORATING_TYPE_SPECIFIER	c++.y	2038
+NON_ELABORATING_TYPE_SPECIFIER_SEQ	c++.y	2034
+NON_PAREN_DECLARATOR	c++.y	1235
+NON_PAREN_INIT_DECLARATOR	c++.y	1178
+NON_PAREN_MEMBER_DECLARATOR	c++.y	1862
+NON_PAREN_MEMBER_FUNCTION_DEFINITION	c++.y	1877
+NON_PAREN_MEMBER_FUNCTION_DEFINITION_LEFT	c++.y	1884
+NON_REDEF_DECLARATOR	c++.y	1222
+NON_REDEF_DECLARATOR_ID	c++.y	1415
+OBVIOUSLY_A_DECLARATOR	c++.y	1260
+OPERATOR_FUNCTION_ID	c++.y	2102
+OPERATOR_NAME	c++.y	2110
+OPERATOR_SCOPE	c++.y	2066
+ORIGINAL_NAMESPACE_DEFINITION	c++.y	1011
+ORIGINAL_NAMESPACE_NAME	c++.y	994
+PARAMETERS_LEFT	c++.y	1816
+PARAMETER_DECLARATION	c++.y	1519
+PARAMETER_DECLARATION_CLAUSE	c++.y	1495
+PARAMETER_DECLARATION_CLAUSE_OR_CONTRUCTOR_CALL	c++.y	1545
+PARAMETER_DECLARATION_LIST	c++.y	1501
+PARAMETER_DECLARATION_LIST_OPT	c++.y	1506
+PARAMETER_LIST_MEMBER_DECLARATOR	c++.y	1872
+PARAMETER_LIST_MEMBER_FUNCTION_DEFINITION	c++.y	1901
+PARAMETER_LIST_MEMBER_FUNCTION_DEFINITION_LEFT	c++.y	1906
+PARAM_PAREN	c++.y	1845
+PAREN_NON_REDEF_DECLARATOR	c++.y	1247
+PAREN_NON_REDEF_INIT_DECLARATOR	c++.y	1183
+PAREN_NON_REDEF_MEMBER_DECLARATOR	c++.y	1867
+PAREN_NON_REDEF_MEMBER_FUNCTION_DEFINITION	c++.y	1889
+PAREN_NON_REDEF_MEMBER_FUNCTION_DEFINITION_LEFT	c++.y	1896
+PARSER_DONE	c++.y	/^#	define PARSER_DONE()	\\$/
+PARSER_INIT	c++.y	/^#	define PARSER_INIT()	\\$/
+PASS_ID	c++.y	/^#	define PASS_ID()	\\$/
+PM_EXPRESSION	c++.y	2996
+POPFREE_ID	c++.y	/^#	define POPFREE_ID()	\\$/
+POPFREE_TYPE	c++.y	/^#	define POPFREE_TYPE()	\\$/
+POP_ID	c++.y	/^#	define POP_ID()	\\$/
+POP_TYPE	c++.y	/^#	define POP_TYPE()	\\$/
+POSTFIX_EXPRESSION	c++.y	2801
+PRIMARY_EXPRESSION	c++.y	2550
+PSEUDO_DESTRUCTOR_NAME	c++.y	2879
+PTR_OPERATOR	c++.y	1383
+PUSH_AUTO_ID	c++.y	/^#	define PUSH_AUTO_ID()	\\$/
+PUSH_ID	c++.y	/^#	define PUSH_ID(x)	\\$/
+PUSH_OP_ID	c++.y	/^#	define PUSH_OP_ID(op)	\/* TODO *\/	\\$/
+PUSH_TYPE	c++.y	/^#	define PUSH_TYPE(x)	\\$/
+QUALIFIED_NAMESPACE_SPECIFIER	c++.y	1069
+RELATIONAL_EXPRESSION	c++.y	3052
+SELECTION_STATEMENT	c++.y	2447
+SELECTION_STATEMENT_RIGHT	c++.y	2457
+SHIFT_EXPRESSION	c++.y	3035
+SIMPLE_DECLARATION	c++.y	516
+SIMPLE_DECLARATION_STATEMENT	c++.y	2537
+SIMPLE_TYPE_SPECIFIER	c++.y	741
+STATEMENT	c++.y	2401
+STATEMENT_EXPRESSION	c++.y	3179
+STATEMENT_SEQ	c++.y	2437
+STATEMENT_SEQ_OPT	c++.y	2442
+STORAGE_CLASS_FUNCTION_FRIEND_OR_TYPEDEF_SPEC_LIST_OPT	c++.y	604
+STORAGE_CLASS_FUNCTION_FRIEND_TYPEDEF_BIT_FLD_OR_SIMPLE_SPEC_LIST_OPT	c++.y	650
+STORAGE_CLASS_FUNCTION_FRIEND_TYPEDEF_OR_SIMPLE_SPEC_LIST_OPT	c++.y	622
+STORAGE_CLASS_SPECIFIER	c++.y	657
+STR	main.c	/^#define STR(v) #v$/
+STRICT_NAMED_TYPE_SPECIFIER	c++.y	705
+STRICT_NESTED_TYPE_NAME_SPECIFIER	c++.y	2689
+STRING_LIST	c++.y	443
+TEMPLATE_ARGUMENT	c++.y	2269
+TEMPLATE_ARGUMENT_LIST	c++.y	2245
+TEMPLATE_ARGUMENT_LIST_OPT	c++.y	2250
+TEMPLATE_DECLARATION	c++.y	2170
+TEMPLATE_DECL_SPECIFIER_SEQ	c++.y	2307
+TEMPLATE_ID	c++.y	2236
+TEMPLATE_NAME	c++.y	2241
+TEMPLATE_OPT	c++.y	2573
+TEMPLATE_PARAMETER	c++.y	2208
+TEMPLATE_PARAMETER_DECLARATION	c++.y	2286
+TEMPLATE_PARAMETER_LIST	c++.y	2203
+TEMPLATE_PARAM_LEFT	c++.y	2195
+TEMPLATE_PARAM_RIGHT	c++.y	2199
+TEMP_ID	c++.y	887
+THROW_EXPRESSION	c++.y	2374
+TOP_ID	c++.y	/^#	define TOP_ID()	\\$/
+TOP_TYPE	c++.y	/^#	define TOP_TYPE()	\\$/
+TRANSLATION_UNIT	c++.y	429
+TRY_BLOCK	c++.y	2335
+TYPEDEF_NAME	c++.y	672
+TYPENAME_OPT	c++.y	462
+TYPE_FN_OR_CTOR	c++.y	/^#	define TYPE_FN_OR_CTOR(type, is_ctor)	\\$/
+TYPE_GET	c++.y	/^#	define TYPE_GET()	\/* TODO: *\/	\\$/
+TYPE_ID	c++.y	1428
+TYPE_ID_LIST	c++.y	2389
+TYPE_ID_LIST_OPT	c++.y	2394
+TYPE_LOOKUP	c++.y	/^#	define TYPE_LOOKUP(class)	\\$/
+TYPE_NAME	c++.y	757
+TYPE_OP	c++.y	/^#	define TYPE_OP(op)	\\$/
+TYPE_PARAMETER	c++.y	2213
+TYPE_POP	c++.y	846
+TYPE_SET	c++.y	/^#	define TYPE_SET(type)	\\$/
+TYPE_SPECIFIER	c++.y	720
+TYPE_SPECIFIER_SEQ	c++.y	1439
+TYPE_SPECIFIER_SEQ_OPT	c++.y	1444
+TYPE_THIS	c++.y	/^#	define TYPE_THIS()	\\$/
+TYPE_TO_ENUM	c++.y	925
+UNARY_EXPRESSION	c++.y	2885
+UNARY_OPERATOR	c++.y	2900
+UNNAMED_NAMESPACE_DEFINITION	c++.y	1046
+UNQUALIFIED_ID	c++.y	2566
+USING	c++.y	/^#	define USING()	\\$/
+USING_DECLARATION	c++.y	1079
+USING_DIRECTIVE	c++.y	1084
+USING_ID	c++.y	/^#	define USING_ID(type)	\\$/
+V_STR	main.c	/^#define V_STR(v) STR(v)$/
+context_c_lookup	context.c	/^struct identifier_s *context_c_lookup(const char */
+context_close	context.c	/^void context_close() {$/
+context_done	context.c	/^void context_done() {$/
+context_global	context.c	/^struct symbol_table_s *context_global() {$/
+context_init	context.c	/^void context_init() {$/
+context_local	context.c	/^struct symbol_table_s *context_local() {$/
+context_lookup	context.c	/^struct identifier_s *context_lookup(const char *ke/
+context_open	context.c	/^void context_open(const struct symbol_table_s *con/
+context_print	context.c	/^int context_print() {$/
+context_search	context.c	/^int context_search(struct symbol_table_s *ctx, str/
+context_show_tree	context.c	/^int context_show_tree() {$/
+count	context.c	/^int count(void *ctx, void *data) {$/
+error	main.c	/^void error(const char *s) {$/
+fifo	c++.y	/^	fifo(char *) id_fifo;$/
+free	main.c	/^void free(void *ptr) {$/
+identifier_constructor	identifier.c	/^char *identifier_constructor(const char *name) {$/
+identifier_define	identifier.c	/^void identifier_define($/
+identifier_destructor	identifier.c	/^char *identifier_destructor(const char *name) {$/
+identifier_is_special	identifier.c	/^int identifier_is_special(const char *name) {$/
+identifier_local_lookup	identifier.c	/^struct identifier_s *identifier_local_lookup($/
+identifier_lookup	identifier.c	/^struct identifier_s *identifier_lookup($/
+is_gcc_builtin	builtin.c	/^struct identifier_s *is_gcc_builtin(const char *na/
+language_set_global	language.c	/^void language_set_global(language_t lang) {$/
+language_set_local	language.c	/^void language_set_local(language_t lang) {$/
+list_delete	list.c	/^void list_delete(struct list_s *list, const char */
+list_done	list.c	/^void list_done(struct list_s *list) {$/
+list_find	list.c	/^const void *list_find(struct list_s *list, const c/
+list_foreach	list.c	/^void list_foreach(struct list_s *list, list_iterat/
+list_init	list.c	/^void list_init(struct list_s *list) {$/
+list_insert	list.c	/^void list_insert(struct list_s *list, const void */
+malloc	main.c	/^void *malloc(size_t size) {$/
+operator_name	operator.c	/^char *operator_name(operator_t operator) {$/
+operator_visual	operator.c	/^void operator_visual(const char *name, char *buffe/
+params_default	main.c	/^void params_default() {$/
+params_process	main.c	/^int params_process(int argc, const char *argv[]) {/
+prt	context.c	/^int prt(struct symbol_table_s *ctx, void *data) {$/
+scope_close	scope.c	/^void scope_close() {$/
+scope_close_template	scope.c	/^void scope_close_template() {$/
+scope_completion_info	scope.c	/^void scope_completion_info(struct identifier_s *id/
+scope_define	scope.c	/^struct type_s scope_define($/
+scope_define_conversion	scope.c	/^struct type_s scope_define_conversion(struct type_/
+scope_define_operator	scope.c	/^struct type_s scope_define_operator(operator_t op)/
+scope_done	scope.c	/^void scope_done() {$/
+scope_enum_info	scope.c	/^void scope_enum_info(struct type_s type) {$/
+scope_function_info	scope.c	/^void scope_function_info(struct type_s type) {$/
+scope_id_info	scope.c	/^int scope_id_info(struct identifier_s *id, void *t/
+scope_init	scope.c	/^void scope_init() {$/
+scope_local_lookup	scope.c	/^struct type_s scope_local_lookup(struct type_s typ/
+scope_lookup	scope.c	/^struct identifier_s *scope_lookup(const char *key)/
+scope_lookup_info	scope.c	/^void scope_lookup_info(struct type_s type) {$/
+scope_open	scope.c	/^struct type_s scope_open(const char *name, identif/
+scope_open_params	scope.c	/^struct symbol_table_s *scope_open_params(struct id/
+scope_reset_template	scope.c	/^void scope_reset_template() {$/
+scope_stmt_enter	scope.c	/^void scope_stmt_enter(struct type_s scope) {$/
+scope_stmt_global	scope.c	/^void scope_stmt_global() {$/
+scope_stmt_lookup	scope.c	/^struct identifier_s *scope_stmt_lookup(const char /
+scope_stmt_lookup_info	scope.c	/^void scope_stmt_lookup_info() {$/
+scope_stmt_pop	scope.c	/^void scope_stmt_pop() {$/
+scope_stmt_push	scope.c	/^void scope_stmt_push() {$/
+scope_stmt_reset	scope.c	/^inline void scope_stmt_reset() {$/
+scope_table_info	scope.c	/^int scope_table_info(struct symbol_table_s *table,/
+scope_this	scope.c	/^struct type_s scope_this() {$/
+scope_using	scope.c	/^void scope_using(struct type_s type) {$/
+scope_using_id	scope.c	/^void scope_using_id(struct type_s type, identifier/
+scope_using_namespace	scope.c	/^void scope_using_namespace(struct symbol_table_s */
+set_language	main.c	/^int set_language(const char *arg, int argc, const /
+show	context.c	/^int show(struct symbol_table_s *ctx, int in) {$/
+show0	context.c	/^int show0(void *ctx, void *data) {$/
+show1	context.c	/^int show1(void *ctx, void *data) {$/
+sstack_done	sstack.c	/^void sstack_done(struct sstack_s *stack) {$/
+sstack_empty	sstack.c	/^int sstack_empty(struct sstack_s *stack) {$/
+sstack_foreach	sstack.c	/^void sstack_foreach(struct sstack_s *stack, sstack/
+sstack_init	sstack.c	/^void sstack_init(struct sstack_s *stack, size_t si/
+sstack_pop	sstack.c	/^const void *sstack_pop(struct sstack_s *stack) {$/
+sstack_push	sstack.c	/^void *sstack_push(struct sstack_s *stack) {$/
+sstack_top	sstack.c	/^const void *sstack_top(struct sstack_s *stack) {$/
+sstack_topn	sstack.c	/^const void *sstack_topn(struct sstack_s *stack) {$/
+stack_empty	stack.c	/^int stack_empty(struct stack_s *stack) {$/
+stack_foreach	stack.c	/^void stack_foreach(struct stack_s *stack, stack_it/
+stack_init	stack.c	/^void stack_init(struct stack_s *stack) {$/
+stack_pop	stack.c	/^const void *stack_pop(struct stack_s *stack) {$/
+stack_push	stack.c	/^void stack_push(struct stack_s *stack, const void /
+stack_top	stack.c	/^const void *stack_top(struct stack_s *stack) {$/
+symbol_insert	symbols.c	/^void symbol_insert(struct symbol_table_s *table,$/
+symbol_iterator	symbols.c	/^int symbol_iterator(void *element, struct iter_hel/
+symbol_lookup	symbols.c	/^void *symbol_lookup(struct symbol_table_s *table, /
+symbol_lookup_local	symbols.c	/^void *symbol_lookup_local(struct symbol_table_s *t/
+symbol_nested_lookup	symbols.c	/^int symbol_nested_lookup(struct symbol_table_s *ta/
+symbol_table_def	symbols.c	/^void *symbol_table_def(struct symbol_table_s *tabl/
+symbol_table_done	symbols.c	/^void symbol_table_done(struct symbol_table_s *tabl/
+symbol_table_foreach	symbols.c	/^void symbol_table_foreach(struct symbol_table_s *t/
+symbol_table_init	symbols.c	/^void symbol_table_init(struct symbol_table_s *tabl/
+symbol_table_link	symbols.c	/^void symbol_table_link(struct symbol_table_s *tabl/
+symbol_table_link_foreach	symbols.c	/^void symbol_table_link_foreach(struct symbol_table/
+symbol_table_merge	symbols.c	/^void symbol_table_merge(struct symbol_table_s *dst/
+symbol_table_ordered_init	symbols.c	/^void symbol_table_ordered_init(struct symbol_table/
+symbol_table_unlink	symbols.c	/^void symbol_table_unlink(struct symbol_table_s *ta/
+template_lookup	scope.c	/^struct identifier_s *template_lookup(const char *k/
+tree_delete	tree.c	/^void tree_delete(struct tree_s *tree, const char */
+tree_done	tree.c	/^void tree_done(struct tree_s *tree) {$/
+tree_find	tree.c	/^const void *tree_find(struct tree_s *tree, const c/
+tree_foreach	tree.c	/^void tree_foreach(struct tree_s *tree, tree_iterat/
+tree_init	tree.c	/^void tree_init(struct tree_s *tree) {$/
+tree_insert	tree.c	/^void tree_insert(struct tree_s *tree, const void */
+tree_node_done	tree.c	/^void tree_node_done(struct tree_node_s *node) {$/
+tree_node_foreach	tree.c	/^void tree_node_foreach(struct tree_node_s *node,$/
+type_class	type.c	/^struct type_s type_class(class_style_t type) {$/
+type_connect	type.c	/^struct type_s type_connect(struct type_s type0, st/
+type_copy	type.c	/^struct type_s type_copy(struct type_s type) {$/
+type_dereference	type.c	/^struct type_s type_dereference(struct type_s type)/
+type_dispose	type.c	/^void type_dispose(struct type_s type) {$/
+type_enum	type.c	/^struct type_s type_enum() {$/
+type_none	type.c	/^struct type_s type_none() {$/
+type_parametrized	type.c	/^struct type_s type_parametrized(struct type_s decl/
+type_push	type.c	/^int type_push(struct identifier_s *id,$/
+type_reference	type.c	/^struct type_s type_reference(struct type_s type) {/
+type_return	type.c	/^struct type_s type_return(struct type_s func) {$/
+type_signed	type.c	/^struct type_s type_signed(struct type_s type) {$/
+type_simple	type.c	/^struct type_s type_simple(simple_type_t type) {$/
+type_string	type.c	/^struct type_s type_string() {$/
+type_unsigned	type.c	/^struct type_s type_unsigned(struct type_s type) {$/
+type_visual	type.c	/^void type_visual(struct type_s type, char *buffer)/
+type_visual_param	type.c	/^int type_visual_param(struct identifier_s *id,$/
+type_visual_param_list	type.c	/^void type_visual_param_list(struct symbol_table_s /
+usage	main.c	/^void usage(const char *arg) {$/
+version	main.c	/^void version() {$/

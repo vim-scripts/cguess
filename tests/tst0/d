@@ -1,0 +1,7 @@
+#define A "a"
+#define B b
+#include A
+#include "B"
+#include <B>
+#include ##"##B##"
+## B

@@ -1,0 +1,1 @@
+cpp -I. -w -traditional-cpp a 2>/dev/null | cguess
