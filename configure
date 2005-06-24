@@ -27,7 +27,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-VERSION=0.2
+VERSION=snapshot
 SCRIPT=$0
 
 # Default values
@@ -61,7 +61,6 @@ else
 fi
 
 # Processing arguments
-# TODO: add --noplugin apart from --local and --global
 while test $# -ne 0; do
 	case "$1" in
 	--debug)	VERSION=${VERSION}debug
@@ -70,11 +69,12 @@ while test $# -ne 0; do
 	--prefix=*)	PREFIX=`echo "$1"|sed s/--prefix=//g`;;
 	--local)	PLUGIN=local;;
 	--global)	PLUGIN=global;;
+	--noplugin)	PLUGIN=no;;
 	--vim=*)	VIM=`echo "$1"|sed s/--vim=//g`;;
 	--help)
 		echo Usage:
 		echo -e \\t${SCRIPT} [--debug] [--prefix=path] \
-			[--local \| --global] [--vim=path]
+			[--local \| --global \| --noplugin] [--vim=path]
 		echo -e \\t${SCRIPT} --help
 		echo
 		echo Environment variables that may influence \
@@ -89,9 +89,11 @@ while test $# -ne 0; do
 done
 
 if [ "${PLUGIN}" = "global" ]; then
-	PLUGIN_INSTALL_DIR="$VIM/vim6?/plugin"
-else
+	PLUGIN_INSTALL_DIR="$VIM/vim*/plugin"
+elif [ "${PLUGIN}" = "local" ]; then
 	PLUGIN_INSTALL_DIR="${HOME}/.vim/plugin"
+else
+	PLUGIN_INSTALL_DIR=""
 fi
 
 echo -n writing config...

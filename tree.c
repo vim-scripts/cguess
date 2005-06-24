@@ -116,7 +116,7 @@ void tree_node_foreach(struct tree_node_s *node,
 		tree_iterator_t iter, void *data) {
 	if (node->children[1])
 		tree_node_foreach(node->children[1], iter, data);
-	iter((void *) node->data, data);
+	iter((void *) node->data, data); /* TODO: return val */
 	if (node->children[0])
 		tree_node_foreach(node->children[0], iter, data);
 }

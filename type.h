@@ -112,6 +112,9 @@ typedef struct template_type_s {
 typedef struct function_type_s {
 	struct type_s *return_type;
 	struct symbol_table_s *parameters;
+	int ref_depth;
+	int is_virtual;
+	int is_const;
 	/* is_pure */
 	/* ... */
 } function_type_t;
@@ -136,6 +139,18 @@ typedef enum {
 	template_t,
 	function_t,
 } type_category_t;
+
+/*
+ * The type of reference.
+ */
+typedef enum {
+	pointer_r,
+	reference_r,
+	scoped_pointer_r,
+	const_pointer_r,
+	const_reference_r,
+	const_scoped_pointer_r,
+} reference_t;
 
 /*
  * A variable type in C++.
@@ -163,8 +178,9 @@ struct type_s {
 		template_type_t template_type;
 		function_type_t function_type;
 	};
-	/* is_const */
-	/* is_static */
+
+	int is_const;
+	int is_static;
 	/* is_volatile */
 	/* ... */
 
@@ -184,25 +200,57 @@ extern int type_show_names;
  * TODO: many of these can be made into macros to speed things up.
  * TODO: type_function(a, b)
  */
-struct type_s type_simple(simple_type_t type);
 struct type_s type_class(class_style_t type);
 struct type_s type_string();
 struct type_s type_enum();
 struct type_s type_none();
-struct type_s type_signed(struct type_s type);
 struct type_s type_copy(struct type_s type);
 struct type_s type_named(struct type_s type, const char *name);
 struct type_s type_return(struct type_s func);
 struct type_s type_connect(struct type_s type0, struct type_s type1);
+struct type_s type_parametrized(struct type_s decl, struct symbol_table_s *p);
+void type_visual(struct type_s type, char *buffer);
+
+# ifdef NDEBUG
+#  define type_dispose(_)		({ _; })
+#  define type_const(x)			((x.is_const = 1), x)
+#  define type_function_const(x)	((x.function_type.is_const = 1), x)
+#  define type_virtual(x)		((x.function_type.is_virtual = 1), x)
+#  define type_fn_reference(x)		(	\
+		(x.function_type.ref_depth += x.ref_depth),	\
+		(x.ref_depth = 0),	\
+		x)
+#  define type_signed(x)		({	\
+		if (x.category == basic_t)	\
+			x.basic_type.is_signed = 1;	\
+		x; })
+#  define type_unsigned(x)		({	\
+		if (x.category == basic_t)	\
+			x.basic_type.is_unsigned = 1;	\
+		x; })
+#  define type_reference(x)		((x.ref_depth ++), x)
+#  define type_dereference(x)		((x.ref_depth --), x) /* No checking */
+#  define type_simple(t)		type_simple_ ## t
+extern const struct type_s type_simple_void_t;
+extern const struct type_s type_simple_char_t;
+extern const struct type_s type_simple_short_t;
+extern const struct type_s type_simple_int_t;
+extern const struct type_s type_simple_bool_t;
+extern const struct type_s type_simple_float_t;
+extern const struct type_s type_simple_double_t;
+# else
+
+struct type_s type_simple(simple_type_t type);
+void type_dispose(struct type_s type);
+struct type_s type_const(struct type_s type);
+struct type_s type_signed(struct type_s type);
+struct type_s type_virtual(struct type_s type);
 struct type_s type_unsigned(struct type_s type);
 struct type_s type_reference(struct type_s type);
 struct type_s type_dereference(struct type_s type);
-struct type_s type_parametrized(struct type_s decl, struct symbol_table_s *p);
-void type_visual(struct type_s type, char *buffer);
-# ifdef NDEBUG
-#  define type_dispose(_) ({ _; })
-# else
-void type_dispose(struct type_s type);
+struct type_s type_fn_reference(struct type_s type);
+struct type_s type_function_const(struct type_s type);
+
 # endif /* NDEBUG */
 
 #endif /* __type_h_ */

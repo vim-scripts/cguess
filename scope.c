@@ -108,7 +108,13 @@ struct type_s scope_open(const char *name, identifier_class_t id_class,
 	if (!type.nested)
 		type.definition = 0;
 
-	/* TODO: Check if verbose mode is on */
+	/*
+	 * TODO: Check if verbose mode is on
+	 *
+	 * TODO: use identifier_lookup() and check for virtual
+	 * functions to overload. Remember to update lookup_count
+	 * then.
+	 */
 	if ((id_class != unnamed_c || verbose) && name)
 		id = identifier_local_lookup(table, name);
 
@@ -217,8 +223,16 @@ struct type_s scope_define(
 	struct symbol_table_s *table = context_local();
 	struct identifier_s *id = 0;
 
-	if (name)
+	/*
+	 * TODO: use identifier_lookup() and check for virtual
+	 * functions to overload. Remember to update lookup_count
+	 * then.
+	 */
+	if (name && *name != '?')
 		id = identifier_local_lookup(table, name);
+
+	/* Generate an automatic ID */
+/*	if (name && *name == '?') {}	*/
 
 	/*
 	 * This is only needed when considering the point 9.8 #3 of
@@ -330,8 +344,13 @@ struct type_s scope_define_operator(operator_t op) {
 	struct identifier_s *id = 0;
 	char *name = operator_name(op);
 
+	/*
+	 * TODO: use identifier_lookup() and check for virtual
+	 * functions to overload. Remember to update lookup_count
+	 * then.
+	 */
 	if (stmt_local)
-		id = identifier_lookup(stmt_local, name);
+		id = identifier_local_lookup(stmt_local, name);
 	if (id) {
 		scope_stmt_reset();
 		return type_copy(id->type);
@@ -380,8 +399,14 @@ struct type_s scope_define_conversion(struct type_s type) {
 	type_dispose(type);
 
 	name = identifier_constructor(buffer);
+
+	/*
+	 * TODO: use identifier_lookup() and check for virtual
+	 * functions to overload. Remember to update lookup_count
+	 * then.
+	 */
 	if (stmt_local)
-		id = identifier_lookup(stmt_local, name);
+		id = identifier_local_lookup(stmt_local, name);
 	if (id) {
 		scope_stmt_reset();
 		free(name);
@@ -444,6 +469,8 @@ struct identifier_s *template_lookup(const char *key) {
 
 struct identifier_s *scope_lookup(const char *key) {
 	struct identifier_s *id = 0;
+	identifier_new_lookup();
+
 	if (stmt_local)
 		return scope_stmt_lookup(key);
 /*	if (id)
@@ -609,6 +636,9 @@ int scope_id_info(struct identifier_s *id, void *type_ids) {
 				id->id_class == class_c) {
 			while (width ++ < TYPE_COLUMN)
 				printf(" ");
+
+			if (id->name[0] == '~')
+				id->type.definition = id;
 
 			if (id->id_class == template_c)
 				type_show_names = 0;
@@ -797,6 +827,8 @@ struct identifier_s *scope_stmt_lookup(const char *key) {
 /*		if (stmt_local->definition &&
 				!strcmp(stmt_local->definition->name, key))
 			id = stmt_local->definition;*/
+		identifier_new_lookup();
+
 		ctor_name = identifier_constructor(key);
 		id = identifier_lookup(stmt_local, ctor_name);
 		free(ctor_name);

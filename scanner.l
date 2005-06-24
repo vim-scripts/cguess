@@ -55,6 +55,7 @@
 #	include "fifo.h"
 #	include "language.h"
 #	include "cguess.h"
+#	include "type.h"
 
 #	define YYSTYPE	token_val_t
 #	include "y.tab.h"
@@ -76,6 +77,8 @@
 	extern struct sstack_s id_stack;
 	extern struct sstack_s type_stack;
 	extern fifo(char *) id_fifo;
+
+	char *last_string;
 
 	int line = 1;
 	int eof = 0;
@@ -386,6 +389,11 @@ int lexer() {
 		lookahead --;
 	}
 
+	/* TODO: move this to after all the lookahead */
+	if (token == T_STRING_LITERAL) {
+		last_string = id;
+	}
+
 	if (token == T_IDENTIFIER) {
 		/* Retrieve information about identifier */
 		tokeninfo = scope_lookup(id);
@@ -458,6 +466,9 @@ int lexer() {
 		/*
 		 * Here we are trivially trying to distinguish between a
 		 * beginning of a declaration and a postfix expression.
+		 *
+		 * TODO: cache tokens until the next T_RPAREN and one
+		 * token more.
 		 */
 		if ((
 				token == T_TYPEDEF_ID ||

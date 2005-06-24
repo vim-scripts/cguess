@@ -1,7 +1,7 @@
 " File:		cguess.vim
 " Maintainer:	Andrzej Zaborowski 'balrog' <balrogg@gmail.com>
 " License:	Vim License (see vim's :help license)
-" Version:	0.2
+" Version:	__VERSION__
 " URL:		http://www.zabor.org/cguess
 "
 " This plugin provides some features  that can make writing
@@ -12,12 +12,6 @@
 "
 " To use the plugin, source it with :so cguess.vim and just
 " edit a source file in a supported language.
-"
-" TODO: improve  the choice window keymaps,  make searching
-" across all the identifier,  not only the first  character
-" and make the window close when it is not found so that if
-" a user is typing and the window pops up,  they can ignore
-" it and have the same text entered.
 "
 " TODO: display the namespace name as window title.
 "
@@ -37,7 +31,8 @@
 " as --temp=/bar and cguess will write symbol trees to /bar
 " in binary  for all files  except foo which will  be fully
 " parsed. --file-local  will also cause cguess not to parse
-" functions outside foo.
+" functions outside foo.  Writing the cache  file should be
+" done after forking and the control returns to VIM.
 "
 " TODO: later we could feed the  whole source to cguess and
 " only tell it the  line and column where it  should finish
@@ -56,7 +51,7 @@
 if exists("loaded_cguess")
   finish
 endif
-let loaded_cguess = "v0.2"
+let loaded_cguess = "v__VERSION__"
 
 " Line continuation used here
 let s:cpo_save = &cpo
@@ -148,13 +143,13 @@ endif
 function! s:TriggerList(lang)
 " Don't do anything if the cursor is inside a comment,
 " a constant or a preprocessor directive
-" TODO: improve, use the names
-  let at = synID(line("."), col("."), 0)
+  let at = synIDattr(synID(line("."), col("."), 0), "name")
   let pp = match(getline("."), "^[ \t]*#")
-  if at == 70 || at == 88 || at == 89 || at == 62 ||
-	\ at == 66 || at == 76 || at == 100 ||
-	\ at == 102 || at == 109 || at == 110 ||
-	\ at == 111 || pp > -1
+  if at == "cComment" || at == "cTodo" || at == "cString"
+	\ || at == "cFormat" || at == "cSpecial" || at ==
+	\ "cNumber" || at == "cFloat" || at == "cIncluded"
+	\ || at == "cDefine" || at == "cCharacter" ||
+	\ pp > -1
     if col(".") == col("$") - 1
       star!
     el
@@ -221,10 +216,11 @@ endfunction
 " very fast)
 function! s:TriggerTip(lang)
 " Don't do anything if the cursor is inside a comment,
-" a constant or a preprocessor directive
-" TODO: improve
+" a constant or a preprocessor directive. cCppParen is
+" only for preprocessor's macros so we ignore it.
   let at = synID(line("."), col("."), 0)
-  if at != 94 && at != 93
+  let pp = match(getline("."), "^[ \t]*#")
+  if synIDattr(at, "name") != "cParen" || pp > -1
     if col(".") == col("$") - 1
       star!
     el
@@ -316,7 +312,8 @@ function! s:OpenList(namespace)
   syn match browseFunction	"[a-zA-Z0-9_$]*("he=e-1
   syn keyword browseType	int long short char void wchar ...
   syn keyword browseType	signed unsigned float double bool
-  syn keyword browseSClass	static register auto operator
+  syn keyword browseKeyword	operator
+  syn keyword browseSClass	static register auto
   syn keyword browseSClass	volatile extern const
   syn keyword browseStruct	class struct union enum namespace
   syn match browseOperator	"[\*,~+\\/=!\\^&|<>\[\]\?-]"
@@ -325,7 +322,8 @@ function! s:OpenList(namespace)
   hi def link browseIdentifier	Statement
   hi def link browseFunction	Macro
   hi def link browseOperator	String
-  hi def link browseSClass	Special
+  hi def link browseKeyword	Special
+  hi def link browseSClass	Structure
   hi def link browseStruct	Structure
   hi def link browseType	Keyword
 
@@ -349,12 +347,22 @@ function! s:OpenList(namespace)
   no <buffer> <silent> - :call <SID>Selected("-")<cr>a
   no <buffer> <silent> * :q<cr>a*
   no <buffer> <silent> <esc><esc> :q<cr>a
-  let key = char2nr('a')
-  wh key <= char2nr('z')
-    exe "no <buffer> <silent> " . nr2char(key)
-    \ . " :call <SID>Search(\"" . nr2char(key) . "\")<cr>"
-    let key = key + 1
+  no <buffer> <silent> _ :call <SID>Search("_")<cr>
+  no <buffer> <silent> $ :call <SID>Search("$")<cr>
+  no <buffer> <silent> <bs> :q<cr>a<bs>
+  let keyu = char2nr('a')
+  let keyU = char2nr('A')
+  wh keyu <= char2nr('z')
+    exe "no <buffer> <silent> " . nr2char(keyu)
+    \ . " :call <SID>Search(\"" . nr2char(keyu) . "\")<cr>"
+    exe "no <buffer> <silent> " . nr2char(keyU)
+    \ . " :call <SID>Search(\"" . nr2char(keyU) . "\")<cr>"
+    let keyu = keyu + 1
+    let keyU = keyU + 1
   endw
+
+" Initialize search string
+  let s:srch = ""
 
   let &cpo = cpo_save
 
@@ -383,6 +391,7 @@ function! s:Selected(text)
 " set by the script.
   exe cm
 " star
+  unl s:srch
 endfunction
 
 ""---
@@ -392,10 +401,30 @@ endfunction
 " Note: This needs to be improved
 "
 function! s:Search(char)
-  if search("^" . a:char, 'w') == 0
-    echo "Not found"
-"   beep()
+  if a:char == ""
+    let s:srch = substitute(s:srch, ".$", "", "")
+    if s:srch == ""
+      no <buffer> <silent> <bs> :q<cr>a<bs>
+    endif
+  else
+    let s:srch = s:srch . a:char
+    no <buffer> <silent> <bs> :call <SID>Search("")<cr>
+    if search("^" . s:srch, 'w') == 0
+      let cmd = "norm a" . s:srch
+      unl s:srch
+      clo
+      exe cmd
+      if col(".") == col("$") - 1
+        star!
+      el
+        norm l
+        star
+      en
+      echo "Not found"
+      retu
+    endif
   endif
+  echo s:srch
 endfunction
 
 "---
@@ -413,6 +442,7 @@ function! s:ShowList()
 " Insert ids
   sil exe s:ids
 " sil! %s/\.//g
+  call s:SortR(0, line("$"))
 
 " Jump to top
   0
@@ -421,6 +451,52 @@ function! s:ShowList()
 " Restore
   let &report = oldRep
   let &sc = save_sc
+endfunction
+
+"---
+" Sort lines.  SortR() is called recursively.
+" 
+" By Robert Webb. See ``Examples'' in eval.txt.
+"
+function! s:SortR(start, end)
+
+  " Bottom of the recursion if start reaches end
+  if a:start >= a:end
+    return
+  endif
+  "
+  let partition = a:start - 1
+  let middle = partition
+  let partStr = getline((a:start + a:end) / 2)
+  let i = a:start
+  while (i <= a:end)
+    let str = getline(i)
+    if str <= partStr
+      " Need to put it before the partition.  Swap lines i and partition.
+      let partition = partition + 1
+      if str == partStr
+	let middle = partition
+      endif
+      if i != partition
+	let str2 = getline(partition)
+	call setline(i, str2)
+	call setline(partition, str)
+      endif
+    endif
+    let i = i + 1
+  endwhile
+
+  " Now we have a pointer to the "middle" element, as far as partitioning
+  " goes, which could be anywhere before the partition.  Make sure it is at
+  " the end of the partition.
+  if middle != partition
+    let str = getline(middle)
+    let str2 = getline(partition)
+    call setline(middle, str2)
+    call setline(partition, str)
+  endif
+  call s:SortR(a:start, partition - 1)
+  call s:SortR(partition + 1, a:end)
 endfunction
 
 "---

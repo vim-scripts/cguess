@@ -1,294 +1,318 @@
-ABSTRACT_DECLARATOR	c++.y	1449
-ABSTRACT_DECLARATOR_OPT	c++.y	1455
-ACCESS_SPECIFIER	c++.y	1977
-ADDITIVE_EXPRESSION	c++.y	3027
-AND_EXPRESSION	c++.y	3085
-ASM_DEFINITION	c++.y	1095
-ASM_EXTENSION	c++.y	1114
-ASM_EXTENSION_LIST_OPT	c++.y	1108
-ASM_OPERAND_CONSTRAINT_STRING	c++.y	1122
-ASM_OPERAND_EXPRESSION	c++.y	1129
-ASM_OPERAND_SYMBOLIC	c++.y	1133
-ASSIGNMENT_EXPRESSION	c++.y	3124
-ASSIGNMENT_EXPRESSION_OPT	c++.y	3132
-ASSIGNMENT_OPERATOR	c++.y	3137
-BASE_CLAUSE_LEFT	c++.y	1946
-BASE_CLAUSE_RIGHT	c++.y	1950
-BASE_SPECIFIER	c++.y	1971
-BASE_SPECIFIER_LIST	c++.y	1957
-BIT_FIELD_DECLARATOR	c++.y	1267
-BLOCK_DECLARATION	c++.y	492
-BLOCK_DECLARATION_STATEMENT	c++.y	2525
-CAST_EXPRESSION	c++.y	2989
-CLASS_ENUM_OR_ET_SPECIFIER	c++.y	776
-CLASS_ET_SHORT	c++.y	800
-CLASS_KEY	c++.y	1683
-CLASS_NAME	c++.y	1643
-CLASS_OR_ET_SHORT	c++.y	815
-CLASS_REDEF_OR_ET	c++.y	833
-CLASS_SPECIFIER_LEFT	c++.y	1668
-CLASS_SPECIFIER_RIGHT	c++.y	1676
-CLASS_SPECIFIER_SHORT	c++.y	1654
-COMMA_INIT_DECLARATOR_LIST_OPT	c++.y	1155
-COMPOUND_STATEMENT	c++.y	2433
-CONDITION	c++.y	2463
-CONDITIONAL_EXPRESSION	c++.y	3117
-CONDITION_DECLARATOR	c++.y	2472
-CONDITION_OPT	c++.y	2481
-CONDITION_TYPE_SPECIFIER_SEQ	c++.y	2477
-CONSTANT_EXPRESSION	c++.y	3162
-CONSTANT_EXPRESSION_OPT	c++.y	3166
-CONSTANT_INITIALIZER_OPT	c++.y	1931
-CONVERSION_DECLARATOR_OPT	c++.y	2060
-CONVERSION_FUNCTION_ID	c++.y	1985
-CONVERSION_TYPE_ID	c++.y	2025
-CTOR_INITIALIZER	c++.y	2070
-CTOR_INITIALIZER_OPT	c++.y	2074
-CV_QUALIFIER	c++.y	1394
-CV_QUALIFIER_SEQ	c++.y	1390
-CV_QUALIFIER_SEQ_OPT	c++.y	1400
-DECLARATION	c++.y	482
-DECLARATION_SEQ	c++.y	472
-DECLARATION_SEQ_OPT	c++.y	477
-DECLARATION_STATEMENT	c++.y	2517
-DECLARATOR	c++.y	1209
-DECLARATOR_ID	c++.y	1408
-DECL_SPECIFIER_SEQ	c++.y	569
-DECL_SPECIFIER_SEQ_RIGHT	c++.y	588
-DECL_SPECIFIER_SEQ_START	c++.y	565
-DEFINE	c++.y	/^#	define DEFINE(class)	\\$/
-DEFINE_VAR_OR_FUNC	c++.y	/^#	define DEFINE_VAR_OR_FUNC(x)	\\$/
-DEFINE_VA_LIST	c++.y	/^#	define DEFINE_VA_LIST()	\\$/
-DELETE_ARRAY	c++.y	3194
-DELETE_EXPRESSION	c++.y	2984
-DESTRUCTOR_ID	c++.y	/^#	define DESTRUCTOR_ID()	\\$/
-DIRECT_ABSTRACT_DECLARATOR	c++.y	1463
-DIRECT_ABSTRACT_DECLARATOR_OPT	c++.y	1487
-DIRECT_ABSTRACT_DECLARATOR_PARAMETRIZED_LEFT	c++.y	1481
-DIRECT_DECLARATOR	c++.y	1289
-DIRECT_DECLARATOR_PARAMETRIZED_LEFT	c++.y	1360
-DIRECT_NEW_DECLARATOR	c++.y	2961
-DIRECT_NON_PAREN_DECLARATOR	c++.y	1325
-DIRECT_NON_PAREN_DECLARATOR_PARAMETRIZED_LEFT	c++.y	1371
-DIRECT_NON_REDEF_DECLARATOR	c++.y	1310
-DIRECT_NON_REDEF_DECLARATOR_PARAMETRIZED_LEFT	c++.y	1365
-DIRECT_PAREN_NON_REDEF_DECLARATOR	c++.y	1341
-DIRECT_PAREN_NON_REDEF_DECLARATOR_PARAMETRIZED_LEFT	c++.y	1377
-ELIPSIS_OPT	c++.y	457
-ENTER	c++.y	/^#	define ENTER(class)	\\$/
-ENTER_ANONYMOUS	c++.y	/^#	define ENTER_ANONYMOUS()	\/* TODO: Assign an AUTO/
-ENTER_PARAMS	c++.y	/^#	define ENTER_PARAMS()	\\$/
-ENTER_PARAMS_AT	c++.y	/^#	define ENTER_PARAMS_AT(type)	\\$/
-ENUMERATOR	c++.y	983
-ENUMERATOR_CLAUSE_LEFT	c++.y	943
-ENUMERATOR_CLAUSE_RIGHT	c++.y	952
-ENUMERATOR_DEFINITION	c++.y	975
-ENUMERATOR_LIST	c++.y	962
-ENUM_ET_SHORT	c++.y	880
-ENUM_NAME	c++.y	853
-ENUM_OR_ET_SHORT	c++.y	901
-ENUM_PUSH	c++.y	784
-ENUM_REDEF_OR_ET	c++.y	917
-ENUM_SPECIFIER_SHORT	c++.y	932
-EQUALITY_EXPRESSION	c++.y	3071
-EXCEPTION_DECLARATION	c++.y	2368
-EXCEPTION_SPECIFICATION	c++.y	2379
-EXCEPTION_SPECIFICATION_OPT	c++.y	2384
-EXCLUSIVE_OR_EXPRESSION	c++.y	3091
-EXPLICIT_INSTANTIATION	c++.y	2274
-EXPLICIT_SPECIALIZATION	c++.y	2278
-EXPRESSION	c++.y	3151
-EXPRESSION_LIST	c++.y	2868
-EXPRESSION_LIST_OPT	c++.y	2874
-EXPRESSION_OPT	c++.y	3157
-EXPRESSION_STATEMENT	c++.y	2429
-EXTENSION_NAMESPACE_DEFINITION	c++.y	1022
-FOR_INIT_STATEMENT	c++.y	2504
-FUNCTION_BODY	c++.y	1597
-FUNCTION_BODY_LEFT	c++.y	1588
-FUNCTION_BODY_RIGHT	c++.y	1592
-FUNCTION_DEFINITION	c++.y	1571
-FUNCTION_SPECIFIER	c++.y	666
-FUNCTION_TRY_BLOCK	c++.y	2342
-GLOBAL_SCOPE	c++.y	2758
-HANDLER	c++.y	2362
-HANDLER_SEQ	c++.y	2349
-HANDLER_SEQ_OPT	c++.y	2353
-IDENTIFIER	c++.y	/^#	define IDENTIFIER(str)	\\$/
-IDENTIFIER_AUTO	c++.y	/^#	define IDENTIFIER_AUTO()	\\$/
-IDENTIFIER_C	c++.y	453
-IDENTIFIER_EMPTY	c++.y	/^#	define IDENTIFIER_EMPTY()	\\$/
-IDENTIFIER_OPT	c++.y	448
-ID_CLASS	c++.y	/^#	define ID_CLASS(class)	\\$/
-ID_EXPRESSION	c++.y	2558
-ID_FROM_TYPE	c++.y	/^#	define ID_FROM_TYPE()	\\$/
-ID_MANGLE	c++.y	/^#	define ID_MANGLE()	\\$/
-INCLUSIVE_OR_EXPRESSION	c++.y	3097
-INITIALIZER_CLAUSE	c++.y	1618
-INITIALIZER_LIST	c++.y	1629
-INITIALIZER_LIST_LEFT	c++.y	1635
-INITIALIZER_OPT	c++.y	1607
-INIT_DECLARATOR	c++.y	1174
-INIT_DECLARATOR_LIST	c++.y	1165
-INIT_DECLARATOR_LIST_OPT	c++.y	1160
-ITERATION_STATEMENT	c++.y	2486
-JUMP_STATEMENT	c++.y	2510
-LABELED_STATEMENT	c++.y	2422
-LEAVE	c++.y	/^#	define LEAVE()	\\$/
-LINKAGE_SPECIFICATION	c++.y	1146
-LITERAL	c++.y	435
-LOCAL_SCOPE	c++.y	2775
-LOCAL_SCOPE_SEQ	c++.y	2617
-LOGICAL_AND_EXPRESSION	c++.y	3103
-LOGICAL_OR_EXPRESSION	c++.y	3110
-MEMBER_DECLARATION	c++.y	1753
-MEMBER_DECLARATOR	c++.y	1855
-MEMBER_DECLARATOR_LIST_OPT	c++.y	1779
-MEMBER_PARAMETER_LIST	c++.y	1803
-MEMBER_SPECIFICATION	c++.y	1692
-MEMBER_TEMPLATE_DECLARATION	c++.y	2186
-MEM_INITIALIZER	c++.y	2087
-MEM_INITIALIZER_ID	c++.y	2093
-MEM_INITIALIZER_LIST	c++.y	2082
-MULTIPLICATIVE_EXPRESSION	c++.y	3017
+ABSTRACT_DECLARATOR	c++.y	1536
+ABSTRACT_DECLARATOR_OPT	c++.y	1542
+ACCESS_SPECIFIER	c++.y	2071
+ADDITIVE_EXPRESSION	c++.y	3128
+AND_EXPRESSION	c++.y	3186
+ASM_DEFINITION	c++.y	1153
+ASM_EXTENSION	c++.y	1172
+ASM_EXTENSION_LIST_OPT	c++.y	1166
+ASM_OPERAND_CONSTRAINT_STRING	c++.y	1180
+ASM_OPERAND_EXPRESSION	c++.y	1187
+ASM_OPERAND_SYMBOLIC	c++.y	1191
+ASSIGNMENT_EXPRESSION	c++.y	3225
+ASSIGNMENT_EXPRESSION_OPT	c++.y	3233
+ASSIGNMENT_OPERATOR	c++.y	3238
+BASE_CLAUSE_LEFT	c++.y	2040
+BASE_CLAUSE_RIGHT	c++.y	2044
+BASE_SPECIFIER	c++.y	2065
+BASE_SPECIFIER_LIST	c++.y	2051
+BIT_FIELD_DECLARATOR	c++.y	1347
+BLOCK_DECLARATION	c++.y	524
+BLOCK_DECLARATION_STATEMENT	c++.y	2626
+CAST_EXPRESSION	c++.y	3090
+CLASS_ENUM_OR_ET_SPECIFIER	c++.y	817
+CLASS_ET_SHORT	c++.y	841
+CLASS_KEY	c++.y	1772
+CLASS_NAME	c++.y	1732
+CLASS_OR_ET_SHORT	c++.y	856
+CLASS_REDEF_OR_ET	c++.y	874
+CLASS_SPECIFIER_LEFT	c++.y	1757
+CLASS_SPECIFIER_RIGHT	c++.y	1765
+CLASS_SPECIFIER_SHORT	c++.y	1743
+COMMA_INIT_DECLARATOR_LIST_OPT	c++.y	1235
+COMPOUND_STATEMENT	c++.y	2534
+CONDITION	c++.y	2564
+CONDITIONAL_EXPRESSION	c++.y	3218
+CONDITION_DECLARATOR	c++.y	2573
+CONDITION_OPT	c++.y	2582
+CONDITION_TYPE_SPECIFIER_SEQ	c++.y	2578
+CONSTANT_EXPRESSION	c++.y	3263
+CONSTANT_EXPRESSION_OPT	c++.y	3267
+CONSTANT_INITIALIZER_OPT	c++.y	2025
+CONVERSION_DECLARATOR_OPT	c++.y	2154
+CONVERSION_FUNCTION_ID	c++.y	2079
+CONVERSION_TYPE_ID	c++.y	2119
+CTOR_INITIALIZER	c++.y	2164
+CTOR_INITIALIZER_OPT	c++.y	2168
+CV_QUALIFIER	c++.y	1476
+CV_QUALIFIER_SEQ_OPT	c++.y	1487
+DECLARATION	c++.y	514
+DECLARATION_SEQ	c++.y	504
+DECLARATION_SEQ_OPT	c++.y	509
+DECLARATION_STATEMENT	c++.y	2618
+DECLARATOR	c++.y	1289
+DECLARATOR_ID	c++.y	1495
+DECL_SPECIFIER_SEQ	c++.y	603
+DECL_SPECIFIER_SEQ_RIGHT	c++.y	625
+DECL_SPECIFIER_SEQ_START	c++.y	599
+DEFINE	c++.c	/^#	define DEFINE(class)	\\$/
+DEFINE_VAR_OR_FUNC	c++.c	/^#	define DEFINE_VAR_OR_FUNC(x)	\\$/
+DEFINE_VA_LIST	c++.c	/^#	define DEFINE_VA_LIST()	\\$/
+DELETE_ARRAY	c++.y	3295
+DELETE_EXPRESSION	c++.y	3085
+DESTRUCTOR_ID	c++.c	/^#	define DESTRUCTOR_ID()	\\$/
+DIRECT_ABSTRACT_DECLARATOR	c++.y	1550
+DIRECT_ABSTRACT_DECLARATOR_OPT	c++.y	1576
+DIRECT_ABSTRACT_DECLARATOR_PARAMETRIZED_LEFT	c++.y	1570
+DIRECT_DECLARATOR	c++.y	1366
+DIRECT_DECLARATOR_PARAMETRIZED_LEFT	c++.y	1445
+DIRECT_NEW_DECLARATOR	c++.y	3062
+DIRECT_NON_PAREN_DECLARATOR	c++.y	1406
+DIRECT_NON_PAREN_DECLARATOR_PARAMETRIZED_LEFT	c++.y	1456
+DIRECT_NON_REDEF_DECLARATOR	c++.y	1389
+DIRECT_NON_REDEF_DECLARATOR_PARAMETRIZED_LEFT	c++.y	1450
+DIRECT_PAREN_NON_REDEF_DECLARATOR	c++.y	1424
+DIRECT_PAREN_NON_REDEF_DECLARATOR_PARAMETRIZED_LEFT	c++.y	1462
+ELIPSIS_OPT	c++.y	489
+ENTER	c++.c	/^#	define ENTER(class)	\\$/
+ENTER_ANONYMOUS	c++.c	/^#	define ENTER_ANONYMOUS()	\/* TODO: Assign an AUTO/
+ENTER_PARAMS	c++.c	/^#	define ENTER_PARAMS()	\\$/
+ENTER_PARAMS_AT	c++.c	/^#	define ENTER_PARAMS_AT(type)	\\$/
+ENUMERATOR	c++.y	1041
+ENUMERATOR_CLAUSE_LEFT	c++.y	1001
+ENUMERATOR_CLAUSE_RIGHT	c++.y	1010
+ENUMERATOR_DEFINITION	c++.y	1033
+ENUMERATOR_LIST	c++.y	1020
+ENUM_ET_SHORT	c++.y	921
+ENUM_NAME	c++.y	894
+ENUM_OR_ET_SHORT	c++.y	946
+ENUM_PUSH	c++.y	825
+ENUM_REDEF_OR_ET	c++.y	971
+ENUM_SPECIFIER_SHORT	c++.y	990
+EQUALITY_EXPRESSION	c++.y	3172
+EXCEPTION_DECLARATION	c++.y	2469
+EXCEPTION_SPECIFICATION	c++.y	2480
+EXCEPTION_SPECIFICATION_OPT	c++.y	2485
+EXCLUSIVE_OR_EXPRESSION	c++.y	3192
+EXPLICIT_INSTANTIATION	c++.y	2368
+EXPLICIT_SPECIALIZATION	c++.y	2372
+EXPRESSION	c++.y	3252
+EXPRESSION_LIST	c++.y	2969
+EXPRESSION_LIST_OPT	c++.y	2975
+EXPRESSION_OPT	c++.y	3258
+EXPRESSION_STATEMENT	c++.y	2530
+EXTENSION_NAMESPACE_DEFINITION	c++.y	1080
+FOR_INIT_STATEMENT	c++.y	2605
+FUNCTION_BODY	c++.y	1686
+FUNCTION_BODY_LEFT	c++.y	1677
+FUNCTION_BODY_RIGHT	c++.y	1681
+FUNCTION_DEFINITION	c++.y	1660
+FUNCTION_SPECIFIER	c++.y	706
+FUNCTION_TRY_BLOCK	c++.y	2443
+GLOBAL_SCOPE	c++.y	2859
+GNU_ANONYMOUS_UNION	c++.c	/^#	define GNU_ANONYMOUS_UNION(tp)	\\$/
+HANDLER	c++.y	2463
+HANDLER_SEQ	c++.y	2450
+HANDLER_SEQ_OPT	c++.y	2454
+IDENTIFIER	c++.c	/^#	define IDENTIFIER(str)	\\$/
+IDENTIFIER_AUTO	c++.c	/^#	define IDENTIFIER_AUTO()	\\$/
+IDENTIFIER_C	c++.y	485
+IDENTIFIER_EMPTY	c++.c	/^#	define IDENTIFIER_EMPTY()	\\$/
+IDENTIFIER_OPT	c++.y	480
+ID_CLASS	c++.c	/^#	define ID_CLASS(class)	\\$/
+ID_EXPRESSION	c++.y	2659
+ID_FROM_TYPE	c++.c	/^#	define ID_FROM_TYPE()	\\$/
+ID_MANGLE	c++.c	/^#	define ID_MANGLE()	\\$/
+INCLUSIVE_OR_EXPRESSION	c++.y	3198
+INITIALIZER_CLAUSE	c++.y	1707
+INITIALIZER_LIST	c++.y	1718
+INITIALIZER_LIST_LEFT	c++.y	1724
+INITIALIZER_OPT	c++.y	1696
+INIT_DECLARATOR	c++.y	1254
+INIT_DECLARATOR_LIST	c++.y	1245
+INIT_DECLARATOR_LIST_OPT	c++.y	1240
+ITERATION_STATEMENT	c++.y	2587
+JUMP_STATEMENT	c++.y	2611
+LABELED_STATEMENT	c++.y	2523
+LANGUAGE_STRING	c++.y	1227
+LEAVE	c++.c	/^#	define LEAVE()	\\$/
+LINKAGE_SPECIFICATION	c++.y	1215
+LITERAL	c++.y	467
+LOCAL_SCOPE	c++.y	2876
+LOCAL_SCOPE_SEQ	c++.y	2717
+LOGICAL_AND_EXPRESSION	c++.y	3204
+LOGICAL_OR_EXPRESSION	c++.y	3211
+MEMBER_DECLARATION	c++.y	1842
+MEMBER_DECLARATOR	c++.y	1949
+MEMBER_DECLARATOR_LIST_OPT	c++.y	1870
+MEMBER_PARAMETER_LIST	c++.y	1894
+MEMBER_SPECIFICATION	c++.y	1781
+MEMBER_TEMPLATE_DECLARATION	c++.y	2280
+MEM_INITIALIZER	c++.y	2181
+MEM_INITIALIZER_ID	c++.y	2187
+MEM_INITIALIZER_LIST	c++.y	2176
+MULTIPLICATIVE_EXPRESSION	c++.y	3118
 Mmain	main.c	/^int main(int argc, const char *argv[]) {$/
-NAMED_NAMESPACE_DEFINITION	c++.y	1003
-NAMED_TYPE_SPECIFIER	c++.y	692
-NAMESPACE_ALIAS	c++.y	1058
-NAMESPACE_ALIAS_DEFINITION	c++.y	1062
-NAMESPACE_BODY	c++.y	1054
-NAMESPACE_DEFINITION	c++.y	998
-NAMESPACE_NAME	c++.y	989
-NESTED_NAMESPACE_ALIAS_SPECIFIER	c++.y	2737
-NESTED_NAMESPACE_ALIAS_SPECIFIER_LOCAL	c++.y	2751
-NESTED_NAME_SPECIFIER	c++.y	2578
-NESTED_ORIGINAL_NAMESPACE_NAME_SPECIFIER	c++.y	2706
-NESTED_ORIGINAL_NAMESPACE_NAME_SPECIFIER_LOCAL	c++.y	2721
-NESTED_SCOPE_SPECIFIER	c++.y	2604
-NESTED_TYPE_NAME_SPECIFIER	c++.y	2662
-NESTED_TYPE_OR_NAME_SPECIFIER	c++.y	2624
-NEW_ARRAY	c++.y	3186
-NEW_DECLARATOR	c++.y	2950
-NEW_DECLARATOR_OPT	c++.y	2956
-NEW_EXPRESSION	c++.y	2914
-NEW_INITIALIZER	c++.y	2970
-NEW_INITIALIZER_OPT	c++.y	2976
-NEW_PLACEMENT	c++.y	2921
-NEW_PLACEMENT_OPT	c++.y	2926
-NEW_TYPE_ID	c++.y	2945
-NE_CLASS_OR_ENUM_SPECIFIER	c++.y	2050
-NON_ELABORATING_TYPE_SPECIFIER	c++.y	2038
-NON_ELABORATING_TYPE_SPECIFIER_SEQ	c++.y	2034
-NON_PAREN_DECLARATOR	c++.y	1235
-NON_PAREN_INIT_DECLARATOR	c++.y	1178
-NON_PAREN_MEMBER_DECLARATOR	c++.y	1862
-NON_PAREN_MEMBER_FUNCTION_DEFINITION	c++.y	1877
-NON_PAREN_MEMBER_FUNCTION_DEFINITION_LEFT	c++.y	1884
-NON_REDEF_DECLARATOR	c++.y	1222
-NON_REDEF_DECLARATOR_ID	c++.y	1415
-OBVIOUSLY_A_DECLARATOR	c++.y	1260
-OPERATOR_FUNCTION_ID	c++.y	2102
-OPERATOR_NAME	c++.y	2110
-OPERATOR_SCOPE	c++.y	2066
-ORIGINAL_NAMESPACE_DEFINITION	c++.y	1011
-ORIGINAL_NAMESPACE_NAME	c++.y	994
-PARAMETERS_LEFT	c++.y	1816
-PARAMETER_DECLARATION	c++.y	1519
-PARAMETER_DECLARATION_CLAUSE	c++.y	1495
-PARAMETER_DECLARATION_CLAUSE_OR_CONTRUCTOR_CALL	c++.y	1545
-PARAMETER_DECLARATION_LIST	c++.y	1501
-PARAMETER_DECLARATION_LIST_OPT	c++.y	1506
-PARAMETER_LIST_MEMBER_DECLARATOR	c++.y	1872
-PARAMETER_LIST_MEMBER_FUNCTION_DEFINITION	c++.y	1901
-PARAMETER_LIST_MEMBER_FUNCTION_DEFINITION_LEFT	c++.y	1906
-PARAM_PAREN	c++.y	1845
-PAREN_NON_REDEF_DECLARATOR	c++.y	1247
-PAREN_NON_REDEF_INIT_DECLARATOR	c++.y	1183
-PAREN_NON_REDEF_MEMBER_DECLARATOR	c++.y	1867
-PAREN_NON_REDEF_MEMBER_FUNCTION_DEFINITION	c++.y	1889
-PAREN_NON_REDEF_MEMBER_FUNCTION_DEFINITION_LEFT	c++.y	1896
-PARSER_DONE	c++.y	/^#	define PARSER_DONE()	\\$/
-PARSER_INIT	c++.y	/^#	define PARSER_INIT()	\\$/
-PASS_ID	c++.y	/^#	define PASS_ID()	\\$/
-PM_EXPRESSION	c++.y	2996
-POPFREE_ID	c++.y	/^#	define POPFREE_ID()	\\$/
-POPFREE_TYPE	c++.y	/^#	define POPFREE_TYPE()	\\$/
-POP_ID	c++.y	/^#	define POP_ID()	\\$/
-POP_TYPE	c++.y	/^#	define POP_TYPE()	\\$/
-POSTFIX_EXPRESSION	c++.y	2801
-PRIMARY_EXPRESSION	c++.y	2550
-PSEUDO_DESTRUCTOR_NAME	c++.y	2879
-PTR_OPERATOR	c++.y	1383
-PUSH_AUTO_ID	c++.y	/^#	define PUSH_AUTO_ID()	\\$/
-PUSH_ID	c++.y	/^#	define PUSH_ID(x)	\\$/
-PUSH_OP_ID	c++.y	/^#	define PUSH_OP_ID(op)	\/* TODO *\/	\\$/
-PUSH_TYPE	c++.y	/^#	define PUSH_TYPE(x)	\\$/
-QUALIFIED_NAMESPACE_SPECIFIER	c++.y	1069
-RELATIONAL_EXPRESSION	c++.y	3052
-SELECTION_STATEMENT	c++.y	2447
-SELECTION_STATEMENT_RIGHT	c++.y	2457
-SHIFT_EXPRESSION	c++.y	3035
-SIMPLE_DECLARATION	c++.y	516
-SIMPLE_DECLARATION_STATEMENT	c++.y	2537
-SIMPLE_TYPE_SPECIFIER	c++.y	741
-STATEMENT	c++.y	2401
-STATEMENT_EXPRESSION	c++.y	3179
-STATEMENT_SEQ	c++.y	2437
-STATEMENT_SEQ_OPT	c++.y	2442
-STORAGE_CLASS_FUNCTION_FRIEND_OR_TYPEDEF_SPEC_LIST_OPT	c++.y	604
-STORAGE_CLASS_FUNCTION_FRIEND_TYPEDEF_BIT_FLD_OR_SIMPLE_SPEC_LIST_OPT	c++.y	650
-STORAGE_CLASS_FUNCTION_FRIEND_TYPEDEF_OR_SIMPLE_SPEC_LIST_OPT	c++.y	622
-STORAGE_CLASS_SPECIFIER	c++.y	657
+NAMED_NAMESPACE_DEFINITION	c++.y	1061
+NAMED_TYPE_SPECIFIER	c++.y	732
+NAMESPACE_ALIAS	c++.y	1116
+NAMESPACE_ALIAS_DEFINITION	c++.y	1120
+NAMESPACE_BODY	c++.y	1112
+NAMESPACE_DEFINITION	c++.y	1056
+NAMESPACE_NAME	c++.y	1047
+NESTED_NAMESPACE_ALIAS_SPECIFIER	c++.y	2838
+NESTED_NAMESPACE_ALIAS_SPECIFIER_LOCAL	c++.y	2852
+NESTED_NAME_SPECIFIER	c++.y	2679
+NESTED_ORIGINAL_NAMESPACE_NAME_SPECIFIER	c++.y	2807
+NESTED_ORIGINAL_NAMESPACE_NAME_SPECIFIER_LOCAL	c++.y	2822
+NESTED_SCOPE_SPECIFIER	c++.y	2705
+NESTED_TYPE_NAME_SPECIFIER	c++.y	2762
+NESTED_TYPE_OR_NAME_SPECIFIER	c++.y	2724
+NEW_ARRAY	c++.y	3287
+NEW_DECLARATOR	c++.y	3051
+NEW_DECLARATOR_OPT	c++.y	3057
+NEW_EXPRESSION	c++.y	3015
+NEW_INITIALIZER	c++.y	3071
+NEW_INITIALIZER_OPT	c++.y	3077
+NEW_PLACEMENT	c++.y	3022
+NEW_PLACEMENT_OPT	c++.y	3027
+NEW_TYPE_ID	c++.y	3046
+NE_CLASS_OR_ENUM_SPECIFIER	c++.y	2144
+NON_ELABORATING_TYPE_SPECIFIER	c++.y	2132
+NON_ELABORATING_TYPE_SPECIFIER_SEQ	c++.y	2128
+NON_PAREN_DECLARATOR	c++.y	1315
+NON_PAREN_INIT_DECLARATOR	c++.y	1258
+NON_PAREN_MEMBER_DECLARATOR	c++.y	1956
+NON_PAREN_MEMBER_FUNCTION_DEFINITION	c++.y	1971
+NON_PAREN_MEMBER_FUNCTION_DEFINITION_LEFT	c++.y	1978
+NON_REDEF_DECLARATOR	c++.y	1302
+NON_REDEF_DECLARATOR_ID	c++.y	1502
+OBVIOUSLY_A_DECLARATOR	c++.y	1340
+OPERATOR_FUNCTION_ID	c++.y	2196
+OPERATOR_NAME	c++.y	2204
+OPERATOR_SCOPE	c++.y	2160
+ORIGINAL_NAMESPACE_DEFINITION	c++.y	1069
+ORIGINAL_NAMESPACE_NAME	c++.y	1052
+PARAMETERS_LEFT	c++.y	1910
+PARAMETER_DECLARATION	c++.y	1608
+PARAMETER_DECLARATION_CLAUSE	c++.y	1584
+PARAMETER_DECLARATION_CLAUSE_OR_CONTRUCTOR_CALL	c++.y	1634
+PARAMETER_DECLARATION_LIST	c++.y	1590
+PARAMETER_DECLARATION_LIST_OPT	c++.y	1595
+PARAMETER_LIST_MEMBER_DECLARATOR	c++.y	1966
+PARAMETER_LIST_MEMBER_FUNCTION_DEFINITION	c++.y	1995
+PARAMETER_LIST_MEMBER_FUNCTION_DEFINITION_LEFT	c++.y	2000
+PARAM_PAREN	c++.y	1939
+PAREN_NON_REDEF_DECLARATOR	c++.y	1327
+PAREN_NON_REDEF_INIT_DECLARATOR	c++.y	1263
+PAREN_NON_REDEF_MEMBER_DECLARATOR	c++.y	1961
+PAREN_NON_REDEF_MEMBER_FUNCTION_DEFINITION	c++.y	1983
+PAREN_NON_REDEF_MEMBER_FUNCTION_DEFINITION_LEFT	c++.y	1990
+PARSER_DONE	c++.c	/^#	define PARSER_DONE()	\\$/
+PARSER_INIT	c++.c	/^#	define PARSER_INIT()	\\$/
+PASS_ID	c++.c	/^#	define PASS_ID()	\\$/
+PM_EXPRESSION	c++.y	3097
+POPFREE_ID	c++.c	/^#	define POPFREE_ID()	\\$/
+POPFREE_TYPE	c++.c	/^#	define POPFREE_TYPE()	\\$/
+POP_ID	c++.c	/^#	define POP_ID()	\\$/
+POP_TYPE	c++.c	/^#	define POP_TYPE()	\\$/
+POSTFIX_EXPRESSION	c++.y	2902
+PRIMARY_EXPRESSION	c++.y	2651
+PSEUDO_DESTRUCTOR_NAME	c++.y	2980
+PTR_OPERATOR	c++.y	1469
+PUSH_AUTO_ID	c++.c	/^#	define PUSH_AUTO_ID()	\\$/
+PUSH_AUTO_NUM_ID	c++.c	/^#	define PUSH_AUTO_NUM_ID()	\\$/
+PUSH_ID	c++.c	/^#	define PUSH_ID(x)	\\$/
+PUSH_OP_ID	c++.c	/^#	define PUSH_OP_ID(op)	\/* TODO *\/	\\$/
+PUSH_TYPE	c++.c	/^#	define PUSH_TYPE(x)	\\$/
+QUALIFIED_NAMESPACE_SPECIFIER	c++.y	1127
+RELATIONAL_EXPRESSION	c++.y	3153
+SELECTION_STATEMENT	c++.y	2548
+SELECTION_STATEMENT_RIGHT	c++.y	2558
+SET_CV	c++.c	/^#	define SET_CV(type)	\\$/
+SET_FSPEC	c++.c	/^#	define SET_FSPEC(type)	\\$/
+SHIFT_EXPRESSION	c++.y	3136
+SIMPLE_DECLARATION	c++.y	548
+SIMPLE_DECLARATION_STATEMENT	c++.y	2638
+SIMPLE_TYPE_SPECIFIER	c++.y	782
+STATEMENT	c++.y	2502
+STATEMENT_EXPRESSION	c++.y	3280
+STATEMENT_SEQ	c++.y	2538
+STATEMENT_SEQ_OPT	c++.y	2543
+STORAGE_CLASS_FUNCTION_FRIEND_OR_TYPEDEF_SPEC_LIST_OPT	c++.y	644
+STORAGE_CLASS_FUNCTION_FRIEND_TYPEDEF_BIT_FLD_OR_SIMPLE_SPEC_LIST_OPT	c++.y	690
+STORAGE_CLASS_FUNCTION_FRIEND_TYPEDEF_OR_SIMPLE_SPEC_LIST_OPT	c++.y	662
+STORAGE_CLASS_SPECIFIER	c++.y	697
 STR	main.c	/^#define STR(v) #v$/
-STRICT_NAMED_TYPE_SPECIFIER	c++.y	705
-STRICT_NESTED_TYPE_NAME_SPECIFIER	c++.y	2689
-STRING_LIST	c++.y	443
-TEMPLATE_ARGUMENT	c++.y	2269
-TEMPLATE_ARGUMENT_LIST	c++.y	2245
-TEMPLATE_ARGUMENT_LIST_OPT	c++.y	2250
-TEMPLATE_DECLARATION	c++.y	2170
-TEMPLATE_DECL_SPECIFIER_SEQ	c++.y	2307
-TEMPLATE_ID	c++.y	2236
-TEMPLATE_NAME	c++.y	2241
-TEMPLATE_OPT	c++.y	2573
-TEMPLATE_PARAMETER	c++.y	2208
-TEMPLATE_PARAMETER_DECLARATION	c++.y	2286
-TEMPLATE_PARAMETER_LIST	c++.y	2203
-TEMPLATE_PARAM_LEFT	c++.y	2195
-TEMPLATE_PARAM_RIGHT	c++.y	2199
-TEMP_ID	c++.y	887
-THROW_EXPRESSION	c++.y	2374
-TOP_ID	c++.y	/^#	define TOP_ID()	\\$/
-TOP_TYPE	c++.y	/^#	define TOP_TYPE()	\\$/
-TRANSLATION_UNIT	c++.y	429
-TRY_BLOCK	c++.y	2335
-TYPEDEF_NAME	c++.y	672
-TYPENAME_OPT	c++.y	462
-TYPE_FN_OR_CTOR	c++.y	/^#	define TYPE_FN_OR_CTOR(type, is_ctor)	\\$/
-TYPE_GET	c++.y	/^#	define TYPE_GET()	\/* TODO: *\/	\\$/
-TYPE_ID	c++.y	1428
-TYPE_ID_LIST	c++.y	2389
-TYPE_ID_LIST_OPT	c++.y	2394
-TYPE_LOOKUP	c++.y	/^#	define TYPE_LOOKUP(class)	\\$/
-TYPE_NAME	c++.y	757
-TYPE_OP	c++.y	/^#	define TYPE_OP(op)	\\$/
-TYPE_PARAMETER	c++.y	2213
-TYPE_POP	c++.y	846
-TYPE_SET	c++.y	/^#	define TYPE_SET(type)	\\$/
-TYPE_SPECIFIER	c++.y	720
-TYPE_SPECIFIER_SEQ	c++.y	1439
-TYPE_SPECIFIER_SEQ_OPT	c++.y	1444
-TYPE_THIS	c++.y	/^#	define TYPE_THIS()	\\$/
-TYPE_TO_ENUM	c++.y	925
-UNARY_EXPRESSION	c++.y	2885
-UNARY_OPERATOR	c++.y	2900
-UNNAMED_NAMESPACE_DEFINITION	c++.y	1046
-UNQUALIFIED_ID	c++.y	2566
-USING	c++.y	/^#	define USING()	\\$/
-USING_DECLARATION	c++.y	1079
-USING_DIRECTIVE	c++.y	1084
-USING_ID	c++.y	/^#	define USING_ID(type)	\\$/
+STRICT_NAMED_TYPE_SPECIFIER	c++.y	745
+STRICT_NESTED_TYPE_NAME_SPECIFIER	c++.y	2790
+STRING_LIST	c++.y	475
+TEMPLATE_ARGUMENT	c++.y	2363
+TEMPLATE_ARGUMENT_LIST	c++.y	2339
+TEMPLATE_ARGUMENT_LIST_OPT	c++.y	2344
+TEMPLATE_DECLARATION	c++.y	2264
+TEMPLATE_DECL_SPECIFIER_SEQ	c++.y	2406
+TEMPLATE_ID	c++.y	2330
+TEMPLATE_NAME	c++.y	2335
+TEMPLATE_OPT	c++.y	2674
+TEMPLATE_PARAMETER	c++.y	2302
+TEMPLATE_PARAMETER_DECLARATION	c++.y	2380
+TEMPLATE_PARAMETER_LIST	c++.y	2297
+TEMPLATE_PARAM_LEFT	c++.y	2289
+TEMPLATE_PARAM_RIGHT	c++.y	2293
+TEMP_ID	c++.y	932
+THROW_EXPRESSION	c++.y	2475
+TOKEN	scanner.c	/^#	define TOKEN(token)			\\$/
+TOP_ID	c++.c	/^#	define TOP_ID()	\\$/
+TOP_TYPE	c++.c	/^#	define TOP_TYPE()	\\$/
+TRANSLATION_UNIT	c++.y	461
+TRY_BLOCK	c++.y	2436
+TYPEDEF_NAME	c++.y	712
+TYPENAME_OPT	c++.y	494
+TYPE_FN_OR_CTOR	c++.c	/^#	define TYPE_FN_OR_CTOR(type, is_ctor)	\\$/
+TYPE_GET	c++.c	/^#	define TYPE_GET()	\/* TODO: *\/	\\$/
+TYPE_ID	c++.y	1515
+TYPE_ID_LIST	c++.y	2490
+TYPE_ID_LIST_OPT	c++.y	2495
+TYPE_LOOKUP	c++.c	/^#	define TYPE_LOOKUP(class)	\\$/
+TYPE_NAME	c++.y	798
+TYPE_OP	c++.c	/^#	define TYPE_OP(op)	\\$/
+TYPE_PARAMETER	c++.y	2307
+TYPE_POP	c++.y	887
+TYPE_SET	c++.c	/^#	define TYPE_SET(type)	\\$/
+TYPE_SPECIFIER	c++.y	760
+TYPE_SPECIFIER_SEQ	c++.y	1526
+TYPE_SPECIFIER_SEQ_OPT	c++.y	1531
+TYPE_THIS	c++.c	/^#	define TYPE_THIS()	\\$/
+TYPE_TO_ENUM	c++.y	983
+UNARY_EXPRESSION	c++.y	2986
+UNARY_OPERATOR	c++.y	3001
+UNNAMED_NAMESPACE_DEFINITION	c++.y	1104
+UNQUALIFIED_ID	c++.y	2667
+USING	c++.c	/^#	define USING()	\\$/
+USING_DECLARATION	c++.y	1137
+USING_DIRECTIVE	c++.y	1142
+USING_ID	c++.c	/^#	define USING_ID(type)	\\$/
 V_STR	main.c	/^#define V_STR(v) STR(v)$/
+YYBACKUP	c++.c	/^#define YYBACKUP(Token, Value)					\\$/
+YYCOPY	c++.c	/^#   define YYCOPY(To, From, Count) \\$/
+YYDPRINTF	c++.c	/^# define YYDPRINTF(Args)			\\$/
+YYDSYMPRINT	c++.c	/^# define YYDSYMPRINT(Args)			\\$/
+YYDSYMPRINTF	c++.c	/^# define YYDSYMPRINTF(Title, Token, Value, Locatio/
+YYLLOC_DEFAULT	c++.c	/^# define YYLLOC_DEFAULT(Current, Rhs, N)         \\/
+YYRECOVERING	c++.c	/^#define YYRECOVERING()  (!!yyerrstatus)$/
+YYSTACK_BYTES	c++.c	/^# define YYSTACK_BYTES(N) \\$/
+YYSTACK_FREE	c++.c	/^#  define YYSTACK_FREE(Ptr) do { \/* empty *\/; } wh/
+YYSTACK_RELOCATE	c++.c	/^# define YYSTACK_RELOCATE(Stack)					\\$/
+YYTRANSLATE	c++.c	/^#define YYTRANSLATE(YYX) 						\\$/
+YY_AT_BOL	scanner.c	/^#define YY_AT_BOL() (YY_CURRENT_BUFFER_LVALUE->yy_/
+YY_FATAL_ERROR	scanner.c	/^#define YY_FATAL_ERROR(msg) yy_fatal_error( msg )$/
+YY_INPUT	scanner.c	/^#define YY_INPUT(buf,result,max_size) \\$/
+YY_LESS_LINENO	scanner.c	/^    #define YY_LESS_LINENO(n)$/
+YY_REDUCE_PRINT	c++.c	/^# define YY_REDUCE_PRINT(Rule)		\\$/
+YY_SC_TO_UI	scanner.c	/^#define YY_SC_TO_UI(c) ((unsigned int) (unsigned c/
+YY_STACK_PRINT	c++.c	/^# define YY_STACK_PRINT(Bottom, Top)				\\$/
+YY_STATE_EOF	scanner.c	/^#define YY_STATE_EOF(state) (YY_END_OF_BUFFER + st/
 context_c_lookup	context.c	/^struct identifier_s *context_c_lookup(const char */
 context_close	context.c	/^void context_close() {$/
 context_done	context.c	/^void context_done() {$/
@@ -302,17 +326,21 @@ context_search	context.c	/^int context_search(struct symbol_table_s *ctx, str/
 context_show_tree	context.c	/^int context_show_tree() {$/
 count	context.c	/^int count(void *ctx, void *data) {$/
 error	main.c	/^void error(const char *s) {$/
-fifo	c++.y	/^	fifo(char *) id_fifo;$/
+fifo	c++.c	/^	fifo(char *) id_fifo;$/
 free	main.c	/^void free(void *ptr) {$/
+getonetoken	scanner.c	/^inline void getonetoken() {$/
 identifier_constructor	identifier.c	/^char *identifier_constructor(const char *name) {$/
 identifier_define	identifier.c	/^void identifier_define($/
 identifier_destructor	identifier.c	/^char *identifier_destructor(const char *name) {$/
 identifier_is_special	identifier.c	/^int identifier_is_special(const char *name) {$/
 identifier_local_lookup	identifier.c	/^struct identifier_s *identifier_local_lookup($/
 identifier_lookup	identifier.c	/^struct identifier_s *identifier_lookup($/
+identifier_new_lookup	identifier.c	/^void identifier_new_lookup() {$/
 is_gcc_builtin	builtin.c	/^struct identifier_s *is_gcc_builtin(const char *na/
+language_from_name	language.c	/^language_t language_from_name(const char *id) {$/
 language_set_global	language.c	/^void language_set_global(language_t lang) {$/
 language_set_local	language.c	/^void language_set_local(language_t lang) {$/
+lexer	scanner.c	/^int lexer() {$/
 list_delete	list.c	/^void list_delete(struct list_s *list, const char */
 list_done	list.c	/^void list_done(struct list_s *list) {$/
 list_find	list.c	/^const void *list_find(struct list_s *list, const c/
@@ -397,21 +425,74 @@ tree_node_done	tree.c	/^void tree_node_done(struct tree_node_s *node) {$/
 tree_node_foreach	tree.c	/^void tree_node_foreach(struct tree_node_s *node,$/
 type_class	type.c	/^struct type_s type_class(class_style_t type) {$/
 type_connect	type.c	/^struct type_s type_connect(struct type_s type0, st/
+type_const	type.c	/^struct type_s type_const(struct type_s type) {$/
 type_copy	type.c	/^struct type_s type_copy(struct type_s type) {$/
 type_dereference	type.c	/^struct type_s type_dereference(struct type_s type)/
 type_dispose	type.c	/^void type_dispose(struct type_s type) {$/
 type_enum	type.c	/^struct type_s type_enum() {$/
+type_fn_reference	type.c	/^struct type_s type_fn_reference(struct type_s type/
+type_function_const	type.c	/^struct type_s type_function_const(struct type_s ty/
 type_none	type.c	/^struct type_s type_none() {$/
 type_parametrized	type.c	/^struct type_s type_parametrized(struct type_s decl/
 type_push	type.c	/^int type_push(struct identifier_s *id,$/
 type_reference	type.c	/^struct type_s type_reference(struct type_s type) {/
 type_return	type.c	/^struct type_s type_return(struct type_s func) {$/
 type_signed	type.c	/^struct type_s type_signed(struct type_s type) {$/
-type_simple	type.c	/^struct type_s type_simple(simple_type_t type) {$/
+type_simple_f	type.c	/^struct type_s type_simple_f(simple_type_t type) {$/
 type_string	type.c	/^struct type_s type_string() {$/
 type_unsigned	type.c	/^struct type_s type_unsigned(struct type_s type) {$/
+type_virtual	type.c	/^struct type_s type_virtual(struct type_s type) {$/
 type_visual	type.c	/^void type_visual(struct type_s type, char *buffer)/
 type_visual_param	type.c	/^int type_visual_param(struct identifier_s *id,$/
 type_visual_param_list	type.c	/^void type_visual_param_list(struct symbol_table_s /
+unput	scanner.c	/^#define unput(c) yyunput( c, (yytext_ptr)  )$/
 usage	main.c	/^void usage(const char *arg) {$/
 version	main.c	/^void version() {$/
+yy_create_buffer	scanner.c	/^    YY_BUFFER_STATE yy_create_buffer  (FILE * file/
+yy_delete_buffer	scanner.c	/^    void yy_delete_buffer (YY_BUFFER_STATE  b )$/
+yy_fatal_error	scanner.c	/^static void yy_fatal_error (yyconst char* msg )$/
+yy_flex_strlen	scanner.c	/^static int yy_flex_strlen (yyconst char * s )$/
+yy_flex_strncpy	scanner.c	/^static void yy_flex_strncpy (char* s1, yyconst cha/
+yy_flush_buffer	scanner.c	/^    void yy_flush_buffer (YY_BUFFER_STATE  b )$/
+yy_get_next_buffer	scanner.c	/^static int yy_get_next_buffer (void)$/
+yy_get_previous_state	scanner.c	/^    static yy_state_type yy_get_previous_state (vo/
+yy_init_buffer	scanner.c	/^    static void yy_init_buffer  (YY_BUFFER_STATE  /
+yy_load_buffer_state	scanner.c	/^static void yy_load_buffer_state  (void)$/
+yy_reduce_print	c++.c	/^yy_reduce_print (int yyrule)$/
+yy_scan_buffer	scanner.c	/^YY_BUFFER_STATE yy_scan_buffer  (char * base, yy_s/
+yy_scan_bytes	scanner.c	/^YY_BUFFER_STATE yy_scan_bytes  (yyconst char * byt/
+yy_scan_string	scanner.c	/^YY_BUFFER_STATE yy_scan_string (yyconst char * yy_/
+yy_set_bol	scanner.c	/^#define yy_set_bol(at_bol) \\$/
+yy_set_interactive	scanner.c	/^#define yy_set_interactive(is_interactive) \\$/
+yy_stack_print	c++.c	/^yy_stack_print (short *bottom, short *top)$/
+yy_switch_to_buffer	scanner.c	/^    void yy_switch_to_buffer  (YY_BUFFER_STATE  ne/
+yy_try_NUL_trans	scanner.c	/^    static yy_state_type yy_try_NUL_trans  (yy_sta/
+yyalloc	scanner.c	/^void *yyalloc (yy_size_t  size )$/
+yydestruct	c++.c	/^yydestruct (int yytype, YYSTYPE *yyvaluep)$/
+yyensure_buffer_stack	scanner.c	/^static void yyensure_buffer_stack (void)$/
+yyfree	scanner.c	/^void yyfree (void * ptr )$/
+yyget_debug	scanner.c	/^int yyget_debug  (void)$/
+yyget_in	scanner.c	/^FILE *yyget_in  (void)$/
+yyget_leng	scanner.c	/^int yyget_leng  (void)$/
+yyget_lineno	scanner.c	/^int yyget_lineno  (void)$/
+yyget_out	scanner.c	/^FILE *yyget_out  (void)$/
+yyget_text	scanner.c	/^char *yyget_text  (void)$/
+yyinput	scanner.c	/^    static int yyinput (void)$/
+yyless	scanner.c	/^#define yyless(n) \\$/
+yylex_destroy	scanner.c	/^int yylex_destroy  (void)$/
+yymore	scanner.c	/^#define yymore() yymore_used_but_not_detected$/
+yyparse	c++.c	/^int yyparse (void *YYPARSE_PARAM)$/
+yypop_buffer_state	scanner.c	/^void yypop_buffer_state (void)$/
+yypush_buffer_state	scanner.c	/^void yypush_buffer_state (YY_BUFFER_STATE new_buff/
+yyrealloc	scanner.c	/^void *yyrealloc  (void * ptr, yy_size_t  size )$/
+yyrestart	scanner.c	/^    void yyrestart  (FILE * input_file )$/
+yyset_debug	scanner.c	/^void yyset_debug (int  bdebug )$/
+yyset_in	scanner.c	/^void yyset_in (FILE *  in_str )$/
+yyset_lineno	scanner.c	/^void yyset_lineno (int  line_number )$/
+yyset_out	scanner.c	/^void yyset_out (FILE *  out_str )$/
+yystpcpy	c++.c	/^yystpcpy (char *yydest, const char *yysrc)$/
+yystrlen	c++.c	/^yystrlen (const char *yystr)$/
+yysymprint	c++.c	/^yysymprint (FILE *yyoutput, int yytype, YYSTYPE *y/
+yyterminate	scanner.c	/^#define yyterminate() return YY_NULL$/
+yyunput	scanner.c	/^    static void yyunput (int c, register char * yy/
+yywrap	scanner.c	/^#define yywrap(n) 1$/

@@ -37,6 +37,7 @@
 #include "identifier.h"
 #include "cguess.h"
 
+#ifndef NDEBUG
 struct identifier_s *identifier_lookup(
 		struct symbol_table_s *table, const char *name) {
 	struct identifier_s *id = symbol_lookup(table, name);
@@ -54,6 +55,11 @@ void identifier_define(
 		struct symbol_table_s *table, const struct identifier_s *id) {
 	symbol_insert(table, id, id->name);
 }
+
+void identifier_new_lookup() {
+	lookup_count ++;
+}
+#endif /* NDEBUG */
 
 int identifier_is_special(const char *name) {
 	return !strcmp(name, SPECIAL_ID);

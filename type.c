@@ -38,7 +38,12 @@
 #include "operator.h"
 #include "cguess.h"
 
+#ifdef NDEBUG
+struct type_s type_simple_f(simple_type_t type) {
+#else
 struct type_s type_simple(simple_type_t type) {
+#endif /* NDEBUG */
+
 	struct type_s ret;
 	ret.ref_depth = 0;
 	ret.category = basic_t;
@@ -48,8 +53,27 @@ struct type_s type_simple(simple_type_t type) {
 	ret.basic_type.is_unsigned = 0;
 	ret.definition = 0;
 	ret.nested = 0;
+	ret.is_const = 0;
+	ret.is_static = 0;
 	return ret;
 }
+
+#ifdef NDEBUG
+const struct type_s type_simple_void_t		=
+	{ 0, basic_t, { { void_t, 0, 0, 0 } }, 0, 0, 0, 0 };
+const struct type_s type_simple_char_t		=
+	{ 0, basic_t, { { char_t, 0, 0, 0 } }, 0, 0, 0, 0 };
+const struct type_s type_simple_short_t		=
+	{ 0, basic_t, { { short_t, 0, 0, 0 } }, 0, 0, 0, 0 };
+const struct type_s type_simple_int_t		=
+	{ 0, basic_t, { { int_t, 0, 0, 0 } }, 0, 0, 0, 0 };
+const struct type_s type_simple_bool_t		=
+	{ 0, basic_t, { { bool_t, 0, 0, 0 } }, 0, 0, 0, 0 };
+const struct type_s type_simple_float_t		=
+	{ 0, basic_t, { { float_t, 0, 0, 0 } }, 0, 0, 0, 0 };
+const struct type_s type_simple_double_t	=
+	{ 0, basic_t, { { double_t, 0, 0, 0 } }, 0, 0, 0, 0 };
+#endif /* NDEBUG */
 
 struct type_s type_class(class_style_t type) {
 	struct type_s ret;
@@ -58,6 +82,8 @@ struct type_s type_class(class_style_t type) {
 	ret.class_type.type = type;
 	ret.definition = 0;
 	ret.nested = 0;
+	ret.is_const = 0;
+	ret.is_static = 0;
 	return ret;
 }
 
@@ -71,6 +97,8 @@ struct type_s type_string() {
 	ret.basic_type.is_unsigned = 0;
 	ret.definition = 0;
 	ret.nested = 0;
+	ret.is_const = 0;
+	ret.is_static = 0;
 	return ret;
 }
 
@@ -80,6 +108,8 @@ struct type_s type_enum() {
 	ret.category = enum_t;
 	ret.definition = 0;
 	ret.nested = 0;
+	ret.is_const = 0;
+	ret.is_static = 0;
 	return ret;
 }
 
@@ -92,6 +122,7 @@ struct type_s type_none() {
 	return ret;
 }
 
+#ifndef NDEBUG
 struct type_s type_signed(struct type_s type) {
 	if (type.category == basic_t)
 		type.basic_type.is_signed = 1;
@@ -103,11 +134,14 @@ struct type_s type_unsigned(struct type_s type) {
 		type.basic_type.is_unsigned = 1;
 	return type;
 }
+#endif /* NDEBUG */
 
 /* TODO: this should be improved */
 struct type_s type_connect(struct type_s type0, struct type_s type1) {
 	struct type_s ret;
 	ret.ref_depth = type0.ref_depth + type1.ref_depth;
+	ret.is_const = type0.is_const || type1.is_const;
+	ret.is_static = type0.is_static || type1.is_static;
 	/* This will be removed, but for now it is critical */
 	ret.nested = type0.nested;
 
@@ -143,7 +177,13 @@ struct type_s type_connect(struct type_s type0, struct type_s type1) {
 					exit(-1);
 				}
 				*ret.function_type.return_type = type1;
+
+				ret.function_type.return_type->is_static = 0;
+				ret.function_type.return_type->ref_depth +=
+					ret.ref_depth;
 			}
+
+			ret.ref_depth = ret.function_type.ref_depth;
 			return ret;
 		}
 	} else {
@@ -170,7 +210,13 @@ struct type_s type_connect(struct type_s type0, struct type_s type1) {
 					exit(-1);
 				}
 				*ret.function_type.return_type = type0;
+
+				ret.function_type.return_type->is_static = 0;
+				ret.function_type.return_type->ref_depth +=
+					ret.ref_depth;
 			}
+
+			ret.ref_depth = ret.function_type.ref_depth;
 			return ret;
 		}
 	}
@@ -196,21 +242,26 @@ struct type_s type_connect(struct type_s type0, struct type_s type1) {
 	return ret;
 }
 
+#ifndef NDEBUG
 struct type_s type_reference(struct type_s type) {
 	type.ref_depth ++;
 	return type;
 }
 
 struct type_s type_dereference(struct type_s type) {
-	type.ref_depth --;
+	if (type.ref_depth)
+		type.ref_depth --;
 	return type;
 }
+#endif /* NDEBUG */
 
 /*
  * TODO: some of these stupid checks could be avoided if we
- * first carefully revise the whole "c++.y".
+ * first carefully revised the whole "c++.y".
  *
  * TODO: possibly free old parameter list.
+ *
+ * TODO: functions returning pointers to functions.
  */
 struct type_s type_parametrized(struct type_s decl, struct symbol_table_s *p) {
 	if (decl.category == function_t &&
@@ -222,6 +273,9 @@ struct type_s type_parametrized(struct type_s decl, struct symbol_table_s *p) {
 	decl.category = function_t;
 	decl.function_type.return_type = 0;
 	decl.function_type.parameters = p;
+	decl.function_type.ref_depth = 0;
+	decl.function_type.is_virtual = 0;
+	decl.function_type.is_const = 0;
 	return decl;
 }
 
@@ -319,10 +373,13 @@ int type_visual_param(struct identifier_s *id,
 	if (*name != '.') {
 		/* TODO: check for inifinite loops */
 		type_visual(id->type, data->buf + strlen(data->buf));
-		strcat(data->buf, " ");
+
+		if (*name != '?')
+			strcat(data->buf, " ");
 	}
 
-	strcat(data->buf, name);
+	if (*name != '?')
+		strcat(data->buf, name);
 
 	return 1;
 }
@@ -339,9 +396,12 @@ void type_visual_param_list(struct symbol_table_s *table, char *buffer) {
 			&stck,
 			(stack_iterator_t) type_visual_param,
 			&data);
+	if (data.first)
+		strcat(buffer, "void");
 }
 
 int type_show_names = 1;
+int type_show_static = 1;
 
 /*
  * This function is insecure, there's no buffer overflow
@@ -354,17 +414,23 @@ void type_visual(struct type_s type, char *buffer) {
 
 	if (type.definition)
 		name = type.definition->name;
-	while (type.definition &&
+	while (type.definition && /* TODO: while ->name */
 		type.definition != type.definition->type.definition) {
 		type = type.definition->type;
 		if (type.definition && type.definition->name)
 			name = type.definition->name;
 	}
-	while (name && *name ==  '%')
+	while (name && *name == '%')
 		name ++;
 
 	switch (type.category) {
 	case basic_t:
+		if (type.is_const)
+			strcat(buffer, "const ");
+
+		if (type.is_static && type_show_static)
+			strcat(buffer, "static ");
+
 		if (type_show_names && name &&
 				type.definition->id_class != variable_c &&
 				type.definition->id_class != function_c)
@@ -411,6 +477,12 @@ void type_visual(struct type_s type, char *buffer) {
 		break;
 
 	case classy_t:
+		if (type.is_const)
+			strcat(buffer, "const ");
+
+		if (type.is_static && type_show_static)
+			strcat(buffer, "static ");
+
 		switch (type.class_type.type) {
 		case struct_t:
 			strcat(buffer, "struct");
@@ -434,6 +506,12 @@ void type_visual(struct type_s type, char *buffer) {
 		break;
 
 	case enum_t:
+		if (type.is_const)
+			strcat(buffer, "const ");
+
+		if (type.is_static && type_show_static)
+			strcat(buffer, "static ");
+
 		strcat(buffer, "enum");
 		if (name) {
 			strcat(buffer, " ");
@@ -465,12 +543,17 @@ void type_visual(struct type_s type, char *buffer) {
 		 * not be a destructor.
 		 */
 		if (type.function_type.return_type &&
-				!(name && name[0] == '~')) {
+				!(name && name[0] == '~') &&
+				!(name && type.definition->name[0] == '%')) {
 			type_visual(*type.function_type.return_type,
 					buffer + strlen(buffer));
-			if (type.ref_depth || name)
+			if (type.ref_depth || name || (type.is_static &&
+						type_show_static))
 				strcat(buffer, " ");
 		}
+
+		if (type.is_static && type_show_static)
+			strcat(buffer, "static ");
 
 		/* The chain of pointers */
 		for (i = 0; i < type.ref_depth; i ++)
@@ -491,6 +574,10 @@ void type_visual(struct type_s type, char *buffer) {
 		else
 			strcat(buffer, "void");
 		strcat(buffer, ")");
+
+		if (type.function_type.is_const)
+			strcat(buffer, " const");
+
 		break;
 
 	case none_t:
@@ -499,3 +586,34 @@ void type_visual(struct type_s type, char *buffer) {
 
 	strcat(buffer, ")");
 }
+
+#ifndef NDEBUG
+struct type_s type_const(struct type_s type) {
+	type.is_const = 1;
+	return type;
+}
+
+/*
+ * TODO: these checks should probably be assertions.
+ * They should only depend on the grammar's correctness and
+ * not on the parser's input.
+ */
+struct type_s type_function_const(struct type_s type) {
+	if (type.category == function_t)
+		type.function_type.is_const = 1;
+	return type;
+}
+
+struct type_s type_virtual(struct type_s type) {
+	if (type.category == function_t)
+		type.function_type.is_virtual = 1;
+	return type;
+}
+
+struct type_s type_fn_reference(struct type_s type) {
+	if (type.category == function_t)
+		type.function_type.ref_depth += type.ref_depth;
+	type.ref_depth = 0;
+	return type;
+}
+#endif /* NDEBUG */

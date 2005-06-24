@@ -43,6 +43,8 @@
 #	include "scope.h"
 #	include "sstack.h"
 #	include "fifo.h"
+#	include "type.h"
+#	include "language.h"
 
 #	define YYSTYPE	token_val_t
 #	define yyparse	parse
@@ -75,7 +77,10 @@
 
 #	define PUSH_AUTO_ID()	\
 		PUSH_ID(0)
-/* TODO: move automatic ID generation to scope.c */
+/* TODO: remove. move all automatic ID generation to scope.c */
+
+#	define PUSH_AUTO_NUM_ID()	\
+		PUSH_ID("?")
 
 #	define PUSH_OP_ID(op)	/* TODO */	\
 		PUSH_ID(op.definition->name)
@@ -184,12 +189,49 @@
 			else	\
 				PUSH_ID(__id->name); }))
 
+#	define SET_CV(type)	\
+		type.is_const |= is_const;	\
+		is_const = 0;	\
+		type.is_static |= is_static;	\
+		is_static = 0
+
+#	define SET_FSPEC(type)	\
+		if (is_virtual)	\
+			type = type_virtual(type);	\
+		is_virtual = 0;	\
+		if (is_const)	\
+			type = type_function_const(type);	\
+		is_const = 0;	\
+		type_fn_reference(type)
+
+#	define GNU_ANONYMOUS_UNION(tp)	\
+		if (tp.category == classy_t &&	\
+				tp.class_type.type == union_t &&	\
+				tp.definition &&	\
+/* TODO: Change the following condition when AUTO_IDs will be done */	\
+				!tp.definition->name)	\
+			scope_using(tp);	\
+		else	\
+			type_dispose(tp)
+
+	/*
+	 * This controls if enumerators are accessible from
+	 * the enum type's parents scope. This is practically
+	 * useless in cguess and adds a serious speed overhead.
+	 */
+#	ifndef NDEBUG
+#	 define USING_ENUMS
+#	endif /* NDEBUG */
+
 	/*
 	 * We have these global variables for the purpose of
 	 * inheritance of attributes between siblings in the
 	 * grammar tree.
 	 */
 	int is_type_def = 0;
+	int is_const = 0;
+	int is_static = 0;
+	int is_virtual = 0;
 
 	/*
 	 * The stacks of attributes.
@@ -204,6 +246,7 @@
 	 */
 	identifier_class_t id_class;
 	int is_destructor = 0;
+	extern char* last_string;
 
 	/*
 	 * yydebug tells the parser if it should display information
@@ -222,7 +265,6 @@
  * for unnamed namespaces set the id to <unnamed>,
  * two-stage (dependent) identifier lookup (gcc info pages),
  * resolve conflicts,
- * add %expect n m,
  * move nested names to the lexer (not necesarily),
  * some basic error recovery (pronounce: error ignoring),
  * make two types of symbol tables, those ordered and normal (for params),
@@ -233,7 +275,6 @@
  * copy (malloc & strcpy) ids where typenames are redefined, to be able to
  * normally free ids memory when freeing symbols,
  * get rid of IDENTIFIER_OPT,
- * GNU anonymous unions,
  * use %destructor for freeing semantic values,
  * correctly distribute the reference depth between a function type and
  * its return type,
@@ -248,7 +289,7 @@
 
 /*%debug*/
 %error-verbose
-%expect 72
+%expect 69
 
 /* Parser's input tokens, the grammar's terminal symbols */
 %token T_IDENTIFIER
@@ -515,7 +556,9 @@ BLOCK_DECLARATION:
  */
 SIMPLE_DECLARATION:
 	DECL_SPECIFIER_SEQ_START
-	T_SEMIC				{ POPFREE_TYPE(); is_type_def = 0; }
+	T_SEMIC				{ $$ = POP_TYPE();
+					  GNU_ANONYMOUS_UNION($$);
+					  is_type_def = 0; }
 |	DECL_SPECIFIER_SEQ_START NON_PAREN_INIT_DECLARATOR
 	COMMA_INIT_DECLARATOR_LIST_OPT
 	T_SEMIC				{ POPFREE_TYPE(); is_type_def = 0; }
@@ -570,7 +613,8 @@ DECL_SPECIFIER_SEQ:
 	T_FRIEND
 	DECL_SPECIFIER_SEQ_RIGHT	{ $$ = $2; }
 |	T_TYPEDEF
-	DECL_SPECIFIER_SEQ_RIGHT	{ $$ = $2; is_type_def = 1; }
+	DECL_SPECIFIER_SEQ_RIGHT	{ $$ = $2;
+					  is_type_def = 1; }
 |	STORAGE_CLASS_SPECIFIER
 	DECL_SPECIFIER_SEQ_RIGHT	{ $$ = $2; }
 |	FUNCTION_SPECIFIER
@@ -579,23 +623,28 @@ DECL_SPECIFIER_SEQ:
 	DECL_SPECIFIER_SEQ_RIGHT	{ $$ = $2; }
 |	SIMPLE_TYPE_SPECIFIER
 	STORAGE_CLASS_FUNCTION_FRIEND_TYPEDEF_BIT_FLD_OR_SIMPLE_SPEC_LIST_OPT
-					{ $$ = type_connect($1, $2); }
+					{ $$ = type_connect($1, $2);
+					  SET_CV($$); }
 |	NAMED_TYPE_SPECIFIER
 	STORAGE_CLASS_FUNCTION_FRIEND_TYPEDEF_OR_SIMPLE_SPEC_LIST_OPT
-					{ $$ = type_connect($1, $2); }
+					{ $$ = type_connect($1, $2);
+					  SET_CV($$); }
 ;
 
 DECL_SPECIFIER_SEQ_RIGHT:
 	STORAGE_CLASS_FUNCTION_FRIEND_OR_TYPEDEF_SPEC_LIST_OPT
-					{ $$ = type_simple(void_t); }
+					{ $$ = type_simple(void_t);
+					  SET_CV($$); }
 |	STORAGE_CLASS_FUNCTION_FRIEND_OR_TYPEDEF_SPEC_LIST_OPT
 	SIMPLE_TYPE_SPECIFIER
 	STORAGE_CLASS_FUNCTION_FRIEND_TYPEDEF_BIT_FLD_OR_SIMPLE_SPEC_LIST_OPT
-					{ $$ = type_connect($2, $3); }
+					{ $$ = type_connect($2, $3);
+					  SET_CV($$); }
 |	STORAGE_CLASS_FUNCTION_FRIEND_OR_TYPEDEF_SPEC_LIST_OPT
 	NAMED_TYPE_SPECIFIER
 	STORAGE_CLASS_FUNCTION_FRIEND_TYPEDEF_OR_SIMPLE_SPEC_LIST_OPT
-					{ $$ = type_connect($2, $3); }
+					{ $$ = type_connect($2, $3);
+					  SET_CV($$); }
 ;
 
 /*
@@ -657,7 +706,7 @@ STORAGE_CLASS_FUNCTION_FRIEND_TYPEDEF_BIT_FLD_OR_SIMPLE_SPEC_LIST_OPT:
 STORAGE_CLASS_SPECIFIER:
 	T_AUTO
 |	T_REGISTER
-|	T_STATIC
+|	T_STATIC			{ is_static = 1; }
 |	T_EXTERN
 |	T_MUTABLE
 |	T_THREAD
@@ -665,7 +714,7 @@ STORAGE_CLASS_SPECIFIER:
 
 FUNCTION_SPECIFIER:
 	T_INLINE
-|	T_VIRTUAL
+|	T_VIRTUAL			{ is_virtual = 1; }
 |	T_EXPLICIT
 ;
 
@@ -721,7 +770,8 @@ TYPE_SPECIFIER:
 	NESTED_TYPE_NAME_SPECIFIER	{ $$ = POP_TYPE(); POPFREE_ID(); }
 |	SIMPLE_TYPE_SPECIFIER		{ $$ = $1; }
 |	CLASS_ENUM_OR_ET_SPECIFIER	{ $$ = $1; }
-|	CV_QUALIFIER			{ $$ = type_simple(void_t); }
+|	CV_QUALIFIER			{ $$ = type_simple(void_t);
+					  SET_CV($$); }
 ;
 
 /*
@@ -745,10 +795,10 @@ SIMPLE_TYPE_SPECIFIER:
 |	T_SHORT				{ $$ = type_simple(short_t); }
 |	T_INT				{ $$ = type_simple(int_t); }
 |	T_LONG				{ $$ = type_simple(int_t); }
-|	T_SIGNED			{ $$ = type_signed(
-						type_simple(int_t)); }
-|	T_UNSIGNED			{ $$ = type_unsigned(
-						type_simple(int_t)); }
+|	T_SIGNED			{ $$ = type_simple(int_t);
+					  $$ = type_signed($$); }
+|	T_UNSIGNED			{ $$ = type_simple(int_t);
+					  $$ = type_unsigned($$); }
 |	T_FLOAT				{ $$ = type_simple(float_t); }
 |	T_DOUBLE			{ $$ = type_simple(double_t); }
 |	T_VOID				{ $$ = type_simple(void_t); }
@@ -881,7 +931,11 @@ ENUM_ET_SHORT:
 	NESTED_TYPE_NAME_SPECIFIER
 	ENUM_REDEF_OR_ET		{ $$ = $2; }
 |	IDENTIFIER_C ENUM_OR_ET_SHORT	{ $$ = $2; type_dispose($1); }
-|	TEMP_ID ENUM_SPECIFIER_SHORT	{ $$ = $2; }
+|	TEMP_ID ENUM_SPECIFIER_SHORT	{ $$ = $2;
+#ifdef USING_ENUMS
+					  PUSH_TYPE($2); USING();
+#endif /* USING_ENUMS */
+					}
 ;
 
 TEMP_ID:
@@ -899,7 +953,11 @@ TEMP_ID:
  * variable.
  */ 
 ENUM_OR_ET_SHORT:
-	ENUM_SPECIFIER_SHORT		{ $$ = $1; }
+	ENUM_SPECIFIER_SHORT		{ $$ = $1;
+#ifndef USING_ENUMS
+					  PUSH_TYPE($1); USING();
+#endif /* USING_ENUMS */
+					}
 |	/* Empty */			{ PUSH_TYPE(type_enum());
 					  $$ = DEFINE(enum_c); }
 ;
@@ -913,10 +971,19 @@ ENUM_OR_ET_SHORT:
  * now we will go the easy and ANSI incompatible way, and
  * return the type not defining it, but this must change later.
  * it is the same case that in CLASS_REDEF_OR_ET.
+ *
+ * TODO: also here and above applies perhaps the same that to
+ * UNNAMED_NAMESPACE_DEFINITIONs - the USING() should appear
+ * before entering the enum's scope so that the enumerators
+ * are from the beginning accessible in both scopes.
  */
 ENUM_REDEF_OR_ET:
 	TYPE_TO_ENUM
-	ENUM_SPECIFIER_SHORT		{ $$ = $2; }
+	ENUM_SPECIFIER_SHORT		{ $$ = $2;
+#ifndef USING_ENUMS
+					  PUSH_TYPE($2); USING();
+#endif /* USING_ENUMS */
+					}
 |	/* Empty */			{ $$ = type_connect(POP_TYPE(),
 							type_enum());
 					  POPFREE_ID(); }
@@ -1135,19 +1202,41 @@ ASM_OPERAND_SYMBOLIC:
 ;
 
 /*
- * These could be supported in far far future by launching a parser
- * that doesn't recognise C++ keywords if it is "C" for the inner
- * scope.
+ * Really, we only need to notify lexer about this because
+ * other than the keyword names there should be no problem
+ * parsing C as C++.
  *
- * TODO: Really, we only need to notify lexer about this because
- * other than the keyword names there should be no problem parsing
- * C as C++.
+ * On the other hand when ANSI old-style parameter lists
+ * are supported the language (C/C++) information can be used
+ * to disambiguate between declarators with parens and
+ * constructors.
+ *
+ * There should be a stack of languages or they should be
+ * somehow stored on the yacc's stack (inheriting attributes
+ * of LANGUAGE_STRING) because nested LINKAGE_SPECIFICATIONs
+ * are allowed. This is not very useful thou, so we just go
+ * back to the file's language after leaving.
+ *
+ * TODO: add empty LINKAGE_SPECIFICATIONs for the unrecognized
+ * language (``skip'') but then we need to keep track of the
+ * count of braces and/or T_SEMICs.
  */
 LINKAGE_SPECIFICATION: /* These don't define a scope */
-	T_EXTERN T_STRING_LITERAL
-	T_LBRACE			{ }
-	DECLARATION_SEQ_OPT T_RBRACE	{ }
-|	T_EXTERN T_STRING_LITERAL DECLARATION /* No action. */
+	T_EXTERN LANGUAGE_STRING T_LBRACE
+	DECLARATION_SEQ_OPT T_RBRACE	{ language_set_local(lang_global); }
+|	T_EXTERN LANGUAGE_STRING
+	DECLARATION			{ language_set_local(lang_global); }
+;
+
+/*
+ * With the current lexer not caching strings, we have to be
+ * sure that no lookahead is done after T_EXTERN followed by
+ * T_STRING_LITERAL.
+ */
+LANGUAGE_STRING:
+	T_STRING_LITERAL		{ language_set_local(
+						language_from_name(
+							last_string)); }
 ;
 
 /* Declarators [gram.dcl.decl] */
@@ -1280,9 +1369,6 @@ BIT_FIELD_DECLARATOR:
  *
  * TODO: Exceptions and stuff shall be outside params list.
  *
- * TODO: Correctly combine the ref_depth of function declarator and its
- * return type.
- *
  * TODO: Add some stupid tip about params on DIRECT_DECLARATOR T_LPAREN
  * T_SPECIAL.
  */
@@ -1292,9 +1378,11 @@ DIRECT_DECLARATOR: /* TODO: CONFLICTZ !@@! */
 	PARAMETER_DECLARATION_CLAUSE_OR_CONTRUCTOR_CALL
 	T_RPAREN CV_QUALIFIER_SEQ_OPT
 	EXCEPTION_SPECIFICATION_OPT	{ LEAVE();
-					  $$ = TYPE_FN_OR_CTOR($1, $2); }
+					  $$ = TYPE_FN_OR_CTOR($1, $2);
+					  SET_FSPEC($$); }
 |	DIRECT_DECLARATOR T_FUNCTION CV_QUALIFIER_SEQ_OPT
-	EXCEPTION_SPECIFICATION_OPT	{ $$ = type_parametrized($1, 0); }
+	EXCEPTION_SPECIFICATION_OPT	{ $$ = type_parametrized($1, 0);
+					  SET_FSPEC($$); }
 |	DIRECT_DECLARATOR T_LBRACK CONSTANT_EXPRESSION_OPT
 	T_RBRACK			{ $$ = type_reference($1);
 					  type_dispose($3); }
@@ -1311,9 +1399,11 @@ DIRECT_NON_REDEF_DECLARATOR:
 	NON_REDEF_DECLARATOR_ID		{ $$ = $1; }
 |	DIRECT_NON_REDEF_DECLARATOR_PARAMETRIZED_LEFT
 	PARAMETER_DECLARATION_CLAUSE T_RPAREN CV_QUALIFIER_SEQ_OPT
-	EXCEPTION_SPECIFICATION_OPT	{ LEAVE(); $$ = $1; }
+	EXCEPTION_SPECIFICATION_OPT	{ LEAVE(); $$ = $1;
+					  SET_FSPEC($$); }
 |	DIRECT_NON_REDEF_DECLARATOR T_FUNCTION CV_QUALIFIER_SEQ_OPT
-	EXCEPTION_SPECIFICATION_OPT	{ $$ = type_parametrized($1, 0); }
+	EXCEPTION_SPECIFICATION_OPT	{ $$ = type_parametrized($1, 0);
+					  SET_FSPEC($$); }
 |	DIRECT_NON_REDEF_DECLARATOR T_LBRACK CONSTANT_EXPRESSION_OPT
 	T_RBRACK			{ $$ = type_reference($1);
 					  type_dispose($3); }
@@ -1328,9 +1418,11 @@ DIRECT_NON_PAREN_DECLARATOR:
 	PARAMETER_DECLARATION_CLAUSE_OR_CONTRUCTOR_CALL
 	T_RPAREN CV_QUALIFIER_SEQ_OPT
 	EXCEPTION_SPECIFICATION_OPT	{ LEAVE();
-					  $$ = TYPE_FN_OR_CTOR($1, $2); }
+					  $$ = TYPE_FN_OR_CTOR($1, $2);
+					  SET_FSPEC($$); }
 |	DIRECT_NON_PAREN_DECLARATOR T_FUNCTION CV_QUALIFIER_SEQ_OPT
-	EXCEPTION_SPECIFICATION_OPT	{ $$ = type_parametrized($1, 0); }
+	EXCEPTION_SPECIFICATION_OPT	{ $$ = type_parametrized($1, 0);
+					  SET_FSPEC($$); }
 |	DIRECT_NON_PAREN_DECLARATOR T_LBRACK CONSTANT_EXPRESSION_OPT
 	T_RBRACK			{ $$ = type_reference($1);
 					  type_dispose($3); }
@@ -1343,9 +1435,11 @@ DIRECT_PAREN_NON_REDEF_DECLARATOR:
 	PARAMETER_DECLARATION_CLAUSE_OR_CONTRUCTOR_CALL
 	T_RPAREN CV_QUALIFIER_SEQ_OPT
 	EXCEPTION_SPECIFICATION_OPT	{ LEAVE();
-					  $$ = TYPE_FN_OR_CTOR($1, $2); }
+					  $$ = TYPE_FN_OR_CTOR($1, $2);
+					  SET_FSPEC($$); }
 |	DIRECT_PAREN_NON_REDEF_DECLARATOR T_FUNCTION CV_QUALIFIER_SEQ_OPT
-	EXCEPTION_SPECIFICATION_OPT	{ $$ = type_parametrized($1, 0); }
+	EXCEPTION_SPECIFICATION_OPT	{ $$ = type_parametrized($1, 0);
+					  SET_FSPEC($$); }
 |	DIRECT_PAREN_NON_REDEF_DECLARATOR T_LBRACK CONSTANT_EXPRESSION_OPT
 	T_RBRACK			{ $$ = type_reference($1);
 					  type_dispose($3); }
@@ -1380,26 +1474,28 @@ DIRECT_PAREN_NON_REDEF_DECLARATOR_PARAMETRIZED_LEFT:
 							ENTER_PARAMS_AT($1)); }
 ;
 
+/* TODO: store all the details in a list or a table */
 PTR_OPERATOR:
-	T_STAR CV_QUALIFIER_SEQ_OPT
+	T_STAR CV_QUALIFIER_SEQ_OPT	{ is_const = 0; }
 |	T_AND
 |	NESTED_SCOPE_SPECIFIER T_STAR
-	CV_QUALIFIER_SEQ_OPT		{ scope_stmt_reset(); }
-;
-
-CV_QUALIFIER_SEQ: /* TODO: make the two rules into one, as only OPT is used */
-	CV_QUALIFIER CV_QUALIFIER_SEQ_OPT
+	CV_QUALIFIER_SEQ_OPT		{ scope_stmt_reset(); is_const = 0; }
 ;
 
 CV_QUALIFIER:
-	T_CONST
+	T_CONST				{ is_const = 1; }
 |	T_VOLATILE
 |	T_OVERLOAD	/* ANSI */
 ;
 
+/*
+ * Left recursion saves some SR conflicts.
+ *
+ * CV_QUALIFIER_SEQ was merged into here.
+ */
 CV_QUALIFIER_SEQ_OPT:
 	/* Empty */
-|	CV_QUALIFIER_SEQ
+|	CV_QUALIFIER_SEQ_OPT CV_QUALIFIER
 ;
 
 /*
@@ -1463,11 +1559,13 @@ ABSTRACT_DECLARATOR_OPT:
 DIRECT_ABSTRACT_DECLARATOR:
 	DIRECT_ABSTRACT_DECLARATOR_PARAMETRIZED_LEFT
 	PARAMETER_DECLARATION_CLAUSE T_RPAREN CV_QUALIFIER_SEQ_OPT
-	EXCEPTION_SPECIFICATION_OPT	{ LEAVE(); $$ = $1; }
+	EXCEPTION_SPECIFICATION_OPT	{ LEAVE(); $$ = $1;
+					  SET_FSPEC($$); }
 |	DIRECT_ABSTRACT_DECLARATOR_OPT
 	T_FUNCTION
 	CV_QUALIFIER_SEQ_OPT
-	EXCEPTION_SPECIFICATION_OPT	{ $$ = type_parametrized($1, 0); }
+	EXCEPTION_SPECIFICATION_OPT	{ $$ = type_parametrized($1, 0);
+					  SET_FSPEC($$); }
 |	DIRECT_ABSTRACT_DECLARATOR_OPT
 	T_LBRACK			{ $1 = type_reference($1); }
 	CONSTANT_EXPRESSION_OPT
@@ -1527,12 +1625,12 @@ PARAMETER_DECLARATION:
 					  type_dispose($4); }
 |	DECL_SPECIFIER_SEQ
 	ABSTRACT_DECLARATOR_OPT		{ PUSH_TYPE(type_connect($2, $1));
-					  PUSH_AUTO_ID();
+					  PUSH_AUTO_NUM_ID();
 					  type_dispose(DEFINE(variable_c)); }
 |	DECL_SPECIFIER_SEQ
 	ABSTRACT_DECLARATOR_OPT	T_EQ
 	ASSIGNMENT_EXPRESSION		{ PUSH_TYPE(type_connect($2, $1));
-					  PUSH_AUTO_ID();
+					  PUSH_AUTO_NUM_ID();
 					  type_dispose(DEFINE(variable_c));
 					  type_dispose($4); }
 ;
@@ -1752,7 +1850,9 @@ MEMBER_SPECIFICATION: /* TODO: consider access restrictions (future) */
  */
 MEMBER_DECLARATION:
 	DECL_SPECIFIER_SEQ_START
-	T_SEMIC				{ POPFREE_TYPE(); is_type_def = 0; }
+	T_SEMIC				{ $$ = POP_TYPE();
+					  GNU_ANONYMOUS_UNION($$);
+					  is_type_def = 0; }
 |	DECL_SPECIFIER_SEQ_START NON_PAREN_MEMBER_DECLARATOR
 	MEMBER_DECLARATOR_LIST_OPT
 	T_SEMIC				{ POPFREE_TYPE(); is_type_def = 0; }
@@ -1803,13 +1903,16 @@ MEMBER_DECLARATOR_LIST_OPT:
 MEMBER_PARAMETER_LIST:
 	PARAMETERS_LEFT T_RPAREN CV_QUALIFIER_SEQ_OPT
 	EXCEPTION_SPECIFICATION_OPT
-	CTOR_INITIALIZER_OPT		{ LEAVE(); $$ = $1; }
+	CTOR_INITIALIZER_OPT		{ LEAVE(); $$ = $1;
+					  SET_FSPEC($$); }
 |	PARAMETERS_LEFT T_COMMA PARAMETER_DECLARATION_CLAUSE
 	T_RPAREN CV_QUALIFIER_SEQ_OPT EXCEPTION_SPECIFICATION_OPT
-	CTOR_INITIALIZER_OPT		{ LEAVE(); $$ = $1; }
+	CTOR_INITIALIZER_OPT		{ LEAVE(); $$ = $1;
+					  SET_FSPEC($$); }
 |	T_FUNCTION CV_QUALIFIER_SEQ_OPT EXCEPTION_SPECIFICATION_OPT
 	CTOR_INITIALIZER_OPT		{ $$ = TOP_TYPE();
 					  $$ = type_parametrized($$, 0);
+					  SET_FSPEC($$);
 					  ID_FROM_TYPE(); ID_MANGLE(); }
 ;
 
@@ -1824,22 +1927,22 @@ PARAMETERS_LEFT:
 	ASSIGNMENT_EXPRESSION		{ $$ = $1;
 					  PUSH_TYPE(type_connect($4, $3));
 					  type_dispose(DEFINE(variable_c));
-					  type_dispose($5);
+					  type_dispose($6);
 					  ID_FROM_TYPE(); ID_MANGLE(); }
 |	PARAM_PAREN T_LPAREN DECL_SPECIFIER_SEQ
 	ABSTRACT_DECLARATOR_OPT		{ $$ = $1;
 					  ID_FROM_TYPE(); ID_MANGLE();
 					  PUSH_TYPE(type_connect($4, $3));
-					  PUSH_AUTO_ID();
+					  PUSH_AUTO_NUM_ID();
 					  type_dispose(DEFINE(variable_c)); }
 |	PARAM_PAREN T_LPAREN DECL_SPECIFIER_SEQ
 	ABSTRACT_DECLARATOR_OPT	T_EQ
 	ASSIGNMENT_EXPRESSION		{ $$ = $1;
 					  ID_FROM_TYPE(); ID_MANGLE();
 					  PUSH_TYPE(type_connect($4, $3));
-					  PUSH_AUTO_ID();
+					  PUSH_AUTO_NUM_ID();
 					  type_dispose(DEFINE(variable_c));
-					  type_dispose($5); }
+					  type_dispose($6); }
 ;
 
 PARAM_PAREN:
@@ -2304,6 +2407,11 @@ TEMPLATE_PARAMETER_DECLARATION:
 					  type_dispose($4); }
 ;
 
+/*
+ * Same as DECL_SPECIFIER_SEQ but doesn't allow T_TYPENAME as
+ * the first token. Don't know what the specification says about
+ * this but it seems to work.
+ */
 TEMPLATE_DECL_SPECIFIER_SEQ:
 	T_FRIEND
 	DECL_SPECIFIER_SEQ_RIGHT	{ $$ = $2; }
@@ -2317,10 +2425,12 @@ TEMPLATE_DECL_SPECIFIER_SEQ:
 	DECL_SPECIFIER_SEQ_RIGHT	{ $$ = $2; }
 |	SIMPLE_TYPE_SPECIFIER
 	STORAGE_CLASS_FUNCTION_FRIEND_TYPEDEF_BIT_FLD_OR_SIMPLE_SPEC_LIST_OPT
-					{ $$ = type_connect($1, $2); }
+					{ $$ = type_connect($1, $2);
+					  SET_CV($$); }
 |	STRICT_NAMED_TYPE_SPECIFIER
 	STORAGE_CLASS_FUNCTION_FRIEND_TYPEDEF_OR_SIMPLE_SPEC_LIST_OPT
-					{ $$ = type_connect($1, $2); }
+					{ $$ = type_connect($1, $2);
+					  SET_CV($$); }
 ;
 
 /* Exception Handling [gram.except] */
@@ -2605,7 +2715,6 @@ NESTED_SCOPE_SPECIFIER:
 	LOCAL_SCOPE_SEQ
 |	GLOBAL_SCOPE
 |	GLOBAL_SCOPE LOCAL_SCOPE_SEQ
-|	GLOBAL_SCOPE T_SPECIAL		{ scope_stmt_lookup_info(); YYACCEPT; }
 ;
 
 /*
@@ -2665,6 +2774,7 @@ NESTED_TYPE_NAME_SPECIFIER:
 |	GLOBAL_SCOPE TYPE_NAME		{ $$.nested = 1; }
 |	GLOBAL_SCOPE LOCAL_SCOPE_SEQ
 	TYPE_NAME			{ $$.nested = 1; }
+|	GLOBAL_SCOPE T_SPECIAL		{ scope_stmt_lookup_info(); YYACCEPT; }
 |	T_TYPENAME/*TODO*/
 	NESTED_NAME_SPECIFIER		{ $$ = $1; PUSH_TYPE($1); }
 |	T_TYPENAME TYPE_NAME		{ $$.nested = 0; }
@@ -2898,10 +3008,10 @@ UNARY_EXPRESSION: /* TODO: optimize */
 
 /* TODO: check if they haven't been overloaded */
 UNARY_OPERATOR:
-	T_STAR				{ $$ = type_dereference(
-						type_simple(void_t)); }
-|	T_AND				{ $$ = type_reference(
-						type_simple(void_t)); }
+	T_STAR				{ $$ = type_simple(void_t);
+					  $$ = type_dereference($$); }
+|	T_AND				{ $$ = type_simple(void_t);
+					  $$ = type_reference($$); }
 |	T_PLUS				{ $$ = type_simple(void_t); }
 |	T_MINUS				{ $$ = type_simple(void_t); }
 |	T_NOT				{ $$ = type_simple(void_t); }
@@ -2959,8 +3069,8 @@ NEW_DECLARATOR_OPT:
 ;
 
 DIRECT_NEW_DECLARATOR:
-	T_LBRACK EXPRESSION T_RBRACK	{ $$ = type_reference(
-						type_simple(void_t));
+	T_LBRACK EXPRESSION T_RBRACK	{ $$ = type_simple(void_t);
+					  $$ = type_reference($$);
 					  type_dispose($2); }
 |	DIRECT_NEW_DECLARATOR T_LBRACK CONSTANT_EXPRESSION
 	T_RBRACK			{ $$ = type_reference($1);

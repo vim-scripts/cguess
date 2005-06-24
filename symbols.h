@@ -33,9 +33,8 @@
 
 /* The structures used for the table */
 
-
-# include "tree.h"
-# define STRUCT_NAME(id) tree ## id
+# include "hash.h"
+# define STRUCT_NAME(id) hash ## id
 
 # include "list.h"
 # define STRUCT_O_NAME(id) list ## id
@@ -75,14 +74,14 @@ struct symbol_table_s {
 	STRUCT_O table_o;
 	STRUCT_O links;
 	int is_ordered;
-	struct identifier_s *definition; /* TODO: is this used somewhere? */
+	struct identifier_s *definition;
 
 	/*
-	 * This will hold the number of last lookup when identifier
-	 * lookups will be numbered. This way we can guarantee each
-	 * identifier is only looked up once in each symbol table and
-	 * avoid infinite loops and situations when 2 ^ n lookups are
-	 * required for 2 * n tables.
+	 * This holds the number of the last identifier lookup. Each
+	 * action of searching for a symbol numbered. This way we can
+	 * guarantee that each identifier is only looked up once in each
+	 * symbol table and thus avoid infinite loops and situations
+	 * when 2 ^ n lookups are required for 2 * n tables.
 	 */
 	int lookup_count;
 };

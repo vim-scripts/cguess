@@ -1,6 +1,6 @@
 /*
  * cguess - C/C++/Java(tm) auto-completion tool for VIM
- * Copyright (C) 2005 Andrzej Zaborowski <balrogg@gmail.com>
+ * Copyright (C) 2005 Andrzej Zaborowski <balrog@zabor.org>
  * All Rights Reserved
  *
  * Redistribution and use in source and binary forms, with or without
@@ -8,9 +8,9 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
+ *    notice, this tree of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
+ *    notice, this tree of conditions and the following disclaimer in
  *    the documentation and/or other materials provided with the
  *    distribution.
  *
@@ -29,43 +29,41 @@
  */
 
 /*
- * Utility macros for switching between the supported languages.
+ * A simple hash table implementation. It can be used for
+ * the symbol table.
  */
-#ifndef __language_h_
-# define __language_h_	1
+#ifndef __hash_h_
+# define __hash_h_	1
+
+# include "cguess.h"
+
+# define INITIAL_SIZE	16
+
+typedef int hash_position_t;
+typedef hash_position_t (*hash_function_t) (char *key/*, int try*/);
+
+struct hash_element_s {
+	const void *data;
+	const char *key;
+};
+
+struct hash_s {
+	int size;
+	int mask;
+	int usage;
+	struct hash_element_s *table;
+};
 
 /*
- * Supported languages. ``skip'' is used as lang_local's value
- * when we're currently reading a part of the input that belongs
- * to one of the #included files (as preprocessor's comments
- * indicate) that we may have been reqested not to parse.
+ * The function type for iterating over elements.
  */
-typedef enum language_e {
-	c,
-	cpp,
-	java,
-	skip,
-	language_t_max
-} language_t;
+typedef int (*hash_iterator_t) (void *, void *);
 
-/*
- * The first is the language that the program was started
- * parsing in and the second one is the current language (i.e.
- * at the current cursor position).
- */
-extern language_t lang_global;
-extern language_t lang_local;
+void hash_init(struct hash_s *table);
+void hash_insert(struct hash_s *table, const void *data, const char *key);
+const void *hash_find(struct hash_s *haystack, const char *needle);
+void hash_delete(struct hash_s *table, const char *key);
+void hash_foreach(struct hash_s *table, hash_iterator_t iter, void *data);
+void hash_done(struct hash_s *table);
 
-/*
- * The table of tokens used in the current language. It can map
- * one token's number to other or it can be zero for a token
- * that doesn't exist in the language.
- */
-extern int *tokens;
-
-void language_set_global(language_t lang);
-void language_set_local(language_t lang);
-
-language_t language_from_name(const char *id);
-
-#endif /* __language_h */
+#endif /* __hash_h_ */

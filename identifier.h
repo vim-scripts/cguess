@@ -129,12 +129,34 @@ struct identifier_s {
 # endif /* NDEBUG */
 };
 
+/*
+ * The number of the last identifier lookup. Its purpose is
+ * avoiding infinite loops when searching for a symbol and
+ * gaining some speed (see symbols.h).
+ *
+ * Must be global. Should be increased BEFORE any new lookup
+ * everytime we look for a new identifier or there is any
+ * change in the symbol tables.
+ */
+extern int lookup_count;
+
+
+/* TODO! */
+# ifndef NDEBUG
 struct identifier_s *identifier_lookup(
 		struct symbol_table_s *table, const char *name);
 struct identifier_s *identifier_local_lookup(
 		struct symbol_table_s *table, const char *name);
 void identifier_define(
 		struct symbol_table_s *table, const struct identifier_s *id);
+void identifier_new_lookup();
+# else
+#  define identifier_lookup(t, n)	symbol_lookup(t, n)
+#  define identifier_local_lookup(t, n)	symbol_lookup_local(t, n)
+#  define identifier_define(t, i)	symbol_insert(t, i, i->name)
+#  define identifier_new_lookup()	lookup_count ++
+# endif /* NDEBUG */
+
 int identifier_is_special(const char *name);
 char *identifier_destructor(const char *name);
 char *identifier_constructor(const char *name);

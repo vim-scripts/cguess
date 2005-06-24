@@ -53,4 +53,5 @@ only display vars and funcs in completion info after . and ->
 an identifier struct for a constructor in the symbol table should have a list of all other constructors
 REMEMBER to allow both, the template's parameter types and the ones from the class in a member function parameters list in a code like:
 template <typename _Tp> void vector::find(_Tp element, size_type __n) {} the templates parameters are the same that in the definition of vector so looking up in vector will look the parameters up, too.
-make sure the declarations of constructors that get classified as declarators, jave their names mangled as well.
+make sure the declarations of constructors that get classified as declarators, have their names mangled as well.
+on a redefinition of a function (or definition of an earlier declared function) check if the parameters list pointer in the declarator is equal to the one in the earlier definition or null. If it's not then use the one that's more complete and free the other one.

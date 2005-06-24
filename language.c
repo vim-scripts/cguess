@@ -32,6 +32,8 @@
  * Utility macros for switching between the supported languages.
  */
 
+#include <string.h>
+
 #include "y.tab.h"
 #include "language.h"
 
@@ -362,4 +364,39 @@ void language_set_local(language_t lang) {
 
 	lang_local = lang;
 	tokens = languages[lang];
+}
+
+/*
+ * Returns the language whose string representation is in the
+ * parameter.
+ */
+language_t language_from_name(const char *id) {
+	const char *begin, *end;
+	begin = id;
+	end = id + strlen(id);
+	while (begin < end && (
+				*begin == ' ' || *begin == '\t' ||
+				*begin == '\"' || *begin == '\''))
+		begin ++;
+	while (begin < end && (
+				end[-1] == ' ' || end[-1] == '\t' ||
+				end[-1] == '\"' || end[-1] == '\''))
+		end --;
+
+	switch (end - begin) {
+	case 1:
+		if (*begin == 'c' || *begin == 'C')
+			return c;
+		break;
+
+	case 3:
+		if (*begin == 'c' || *begin == 'C')
+			return cpp;
+		break;
+	}
+
+	if (*begin == 'j' || *begin == 'J')
+		return java;
+
+	return skip;
 }

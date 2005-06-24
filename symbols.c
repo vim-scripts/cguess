@@ -32,6 +32,13 @@
 #include "cguess.h"
 
 /*
+ * The number of the last identifier lookup. Its purpose is
+ * avoiding infinite loops when searching for a symbol and
+ * gaining some speed (see symbols.h).
+ */
+int lookup_count = 0;
+
+/*
  * Initializes an unordered symbol tables at the addres given
  * in first parameter.
  */
@@ -40,6 +47,7 @@ void symbol_table_init(struct symbol_table_s *table, void *def) {
 	STRUCT_CALL(init, &table->table);
 	STRUCT_O_CALL(init, &table->links);
 	table->definition = def;
+	table->lookup_count = 0;
 }
 
 void symbol_table_done(struct symbol_table_s *table) {
@@ -56,6 +64,24 @@ void *symbol_table_def(struct symbol_table_s *table) {
 
 int symbol_nested_lookup(struct symbol_table_s *table, char **key) {
 	void *ret;
+	/*
+	 * We assume that when an identifier is found any
+	 * function that performs the lookup exits immediately,
+	 * and no further lookups are done. Otherwise any
+	 * second lookup will return failure or we would have
+	 * to remember the last lookup's result separately for
+	 * each table.
+	 */
+	if (table->lookup_count == lookup_count)
+		return 0;
+
+	/*
+	 * The counter is updated before the search so that
+	 * if this table is linked by itself or any other
+	 * linked table, no multiple searches are done.
+	 */
+	table->lookup_count = lookup_count;
+
 	if (table->is_ordered)
 		ret = (void *) STRUCT_O_CALL(find, &table->table_o, *key);
 	else
@@ -77,6 +103,24 @@ int symbol_nested_lookup(struct symbol_table_s *table, char **key) {
 
 void *symbol_lookup(struct symbol_table_s *table, const char *key) {
 	void *ret;
+	/*
+	 * We assume that when an identifier is found any
+	 * function that performs the lookup exits immediately,
+	 * and no further lookups are done. Otherwise any
+	 * second lookup will return failure or we would have
+	 * to remember the last lookup's result separately for
+	 * each table.
+	 */
+	if (table->lookup_count == lookup_count)
+		return 0;
+
+	/*
+	 * The counter is updated before the search so that
+	 * if this table is linked by itself or any other
+	 * linked table, no multiple searches are done.
+	 */
+	table->lookup_count = lookup_count;
+
 	if (table->is_ordered)
 		ret = (void *) STRUCT_O_CALL(find, &table->table_o, key);
 	else
@@ -96,6 +140,7 @@ void *symbol_lookup(struct symbol_table_s *table, const char *key) {
 }
 
 void *symbol_lookup_local(struct symbol_table_s *table, const char *key) {
+	/* No counter update is needed here */
 	if (table->is_ordered)
 		return (void *) STRUCT_O_CALL(find, &table->table_o, key);
 	else
@@ -155,7 +200,7 @@ void symbol_table_link(struct symbol_table_s *table,
 			insert,
 			&table->links,
 			link,
-			"x");
+			"<link>");
 }
 
 void symbol_table_unlink(struct symbol_table_s *table) {
@@ -168,6 +213,7 @@ void symbol_table_ordered_init(struct symbol_table_s *table, void *def) {
 	STRUCT_O_CALL(init, &table->table_o);
 	STRUCT_O_CALL(init, &table->links);
 	table->definition = def;
+	table->lookup_count = 0;
 }
 
 void symbol_table_link_foreach(struct symbol_table_s *table,

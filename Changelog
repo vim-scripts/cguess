@@ -1,3 +1,24 @@
+	- Changed vim6? to vim* in configure,
+	- Added --noplugin parameter to configure,
+	- Automatic version number inserted into cguess.vim,
+	- Improved the choice box interface (searching) in cguess.vim,
+	- Added is_const and is_static in struct type_s,
+	- Added is_const, is_virtual & ref_depth in struct function_type_s,
+	- Added helper functions respectively and updated grammar,
+	- Updated type_visual() for static and const modifiers,
+	- Updated highlighting in cguess.vim,
+	- Made some functions from type.c and identifier.c into macros,
+	- Implemented the numbered symbol lookups, changes in symbols.h,
+	symbols.c, identifier.h, identifier.c and scope.c,
+	- Corrected type_visual() for constructors,
+	- Corrected the GLOBAL_SCOPE T_SPECIAL issues in the grammar,
+	- Improved automatic id generation for abstract declarations (still
+	not perfect),
+	- Added a macro that decides where enumerators can be accessed,
+	- Added support for GNU C anonymous unions,
+	- Using a basic implementation of hash tables instead of trees,
+	- Added sorting in the plugin (temporary!),
+
 2005-06-19 20:00  balrog
 	* README:
 

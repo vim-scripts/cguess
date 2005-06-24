@@ -28,7 +28,7 @@
 include config
 
 SUBDIRS=plugin doc tests
-OBJECTS=scanner.o c++.o stack.o context.o scope.o type.o list.o identifier.o symbols.o builtin.o cguess.o tree.o sstack.o operator.o language.o
+OBJECTS=scanner.o c++.o stack.o context.o scope.o type.o list.o identifier.o symbols.o builtin.o cguess.o tree.o sstack.o operator.o language.o splay.o hash.o
 
 all: config cguess sub-all
 cguess: $(OBJECTS)

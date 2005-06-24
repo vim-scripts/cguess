@@ -1,6 +1,7 @@
 include ../config
 all: cguess.vim
-cguess.vim:
+cguess.vim: cguess.vim.in
+	sed s/__VERSION__/${VERSION}/g < $@.in > $@
 install: all
 	for i in $(PLUGIN_DIR); do	\
 		$(INSTALL) -d $$i;	\
@@ -11,4 +12,4 @@ uninstall:
 		$(RM) $$i/cguess.vim;	\
 	done
 clean:
-	$(RM) *.o
+	$(RM) *.o cguess.vim
